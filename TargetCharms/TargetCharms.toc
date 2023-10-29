@@ -6,7 +6,7 @@
 ## Version: 1.6.4 (7/18/2018)
 ## SavedVariables: TargetCharms_OptionsGlobal
 ## SavedVariablesPerCharacter: TargetCharms_Options
-localization.en.lua
 
+Locales\locales.xml
 TargetCharms.xml
 TargetCharmsSetup.xml

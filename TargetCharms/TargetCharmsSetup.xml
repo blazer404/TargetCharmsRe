@@ -1,154 +1,140 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Frame name="TargetCharmsPanelTemplate" toplevel="true" frameStrata="DIALOG" enableMouse="true" hidden="true" parent="UIParent" enableKeyboard="true" virtual="true">
+<Ui xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd" xmlns="http://www.blizzard.com/wow/ui/">
+	<Frame name="TargetCharmsPanelTemplate" virtual="true" hidden="true" parent="UIParent" toplevel="true" frameStrata="DIALOG" enableMouse="true" enableKeyboard="true">
 		<Size>
-			<AbsDimension x="480" y="570"/>
+			<AbsDimension x="480" y="570" />
 		</Size>
 		<Anchors>
-			<Anchor point="CENTER"/>
-		</Anchors>   
-	    <Frames>
-		<Button name="PanelShowButton" ID="1" inherits="OptionsButtonTemplate">
+			<Anchor point="CENTER" />
+		</Anchors>
+		<Frames>
+			<Button ID="1" name="PanelShowButton" inherits="OptionsButtonTemplate">
 				<Size>
-					<AbsDimension x="200" y="20"/>
+					<AbsDimension x="200" y="20" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="-75" y="-100"/>
+							<AbsDimension x="-75" y="-100" />
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_PANEL_SHOW);						
-					</OnLoad>					
+						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_PANEL_SHOW);
+					</OnLoad>
 					<OnClick>
 						ShowSetup();
 					</OnClick>
 				</Scripts>
-		</Button>
-		<Button name="PanelResetButton" ID="1" inherits="OptionsButtonTemplate">
+			</Button>
+			<Button ID="1" name="PanelResetButton" inherits="OptionsButtonTemplate">
 				<Size>
-					<AbsDimension x="200" y="20"/>
+					<AbsDimension x="200" y="20" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="-75" y="-150"/>
+							<AbsDimension x="-75" y="-150" />
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_PANEL_RESET);						
-					</OnLoad>					
+						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_PANEL_RESET);
+					</OnLoad>
 					<OnClick>
 						TargetCharms_Reset();
 					</OnClick>
 				</Scripts>
-		</Button>
-	</Frames>	
-  </Frame> 	
-
-  <Frame name="TargetCharmsSetupTemplate" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" hidden="true" parent="UIParent" enableKeyboard="true" virtual="true">
+			</Button>
+		</Frames>
+	</Frame>
+	<Frame name="TargetCharmsSetupTemplate" virtual="true" hidden="true" parent="UIParent" toplevel="true" movable="true" frameStrata="DIALOG" enableMouse="true" enableKeyboard="true">
 		<Size>
-			<AbsDimension x="480" y="550"/>
+			<AbsDimension x="480" y="565" />
 		</Size>
 		<Anchors>
-			<Anchor point="CENTER"/>
-		</Anchors>    		
-		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-			<BackgroundInsets>
-				<AbsInset left="11" right="12" top="12" bottom="11"/>
-			</BackgroundInsets>
-			<TileSize>
-				<AbsValue val="32"/>
-			</TileSize>
-			<EdgeSize>
-				<AbsValue val="32"/>
-			</EdgeSize>
-		</Backdrop>
+			<Anchor point="CENTER" />
+		</Anchors>
 		<Layers>
 			<Layer level="BACKGROUND">
 				<Texture name="ReadyFrameHeaderBox" file="Interface\DialogFrame\UI-DialogBox-Border">
-					<TexCoords left=".6" right=".65" top="0" bottom="0.5"></TexCoords>
 					<Size>
-						<AbsDimension x="470" y="16"/>
+						<AbsDimension x="470" y="16" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="0" y="-191"/>
+								<AbsDimension x="0" y="-191" />
 							</Offset>
 						</Anchor>
 					</Anchors>
+					<TexCoords left="0.6" right="0.65" top="0" bottom="0.5" />
 				</Texture>
-  			</Layer>
+			</Layer>
 			<Layer level="BACKGROUND">
 				<Texture name="FlareFrameHeaderBox" file="Interface\DialogFrame\UI-DialogBox-Border">
-					<TexCoords left=".6" right=".65" top="0" bottom="0.5"></TexCoords>
 					<Size>
-						<AbsDimension x="470" y="16"/>
+						<AbsDimension x="470" y="16" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="0" y="-311"/>
+								<AbsDimension x="0" y="-311" />
 							</Offset>
 						</Anchor>
 					</Anchors>
+					<TexCoords left="0.6" right="0.65" top="0" bottom="0.5" />
 				</Texture>
-  			</Layer>
+			</Layer>
 			<Layer level="BACKGROUND">
 				<Texture name="ProfileFrameHeaderBox" file="Interface\DialogFrame\UI-DialogBox-Border">
-					<TexCoords left=".6" right=".65" top="0" bottom="0.5"></TexCoords>
 					<Size>
-						<AbsDimension x="470" y="16"/>
+						<AbsDimension x="470" y="16" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="0" y="-471"/>
+								<AbsDimension x="0" y="-471" />
 							</Offset>
 						</Anchor>
 					</Anchors>
+					<TexCoords left="0.6" right="0.65" top="0" bottom="0.5" />
 				</Texture>
-  			</Layer>
-			<Layer level="ARTWORK">
-				
-				
+			</Layer>
+			<Layer>
 				<Texture name="OptionsFrameHeader3" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
-						<AbsDimension x="250" y="64"/>
+						<AbsDimension x="250" y="64" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="108" y="12"/>
+								<AbsDimension x="108" y="12" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</Texture>
 				<Texture name="OptionsFrameHeader2" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
-						<AbsDimension x="200" y="64"/>
+						<AbsDimension x="200" y="64" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-2" y="12"/>
+								<AbsDimension x="-2" y="12" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</Texture>
 				<Texture name="OptionsFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
-						<AbsDimension x="330" y="64"/>
+						<AbsDimension x="330" y="64" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-130" y="12"/>
+								<AbsDimension x="-130" y="12" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -157,113 +143,109 @@
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-130" y="-2"/>
+								<AbsDimension x="-130" y="-2" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</FontString>
-				
 				<Texture name="ReadyFrameHeaderBox3" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
-						<AbsDimension x="250" y="64"/>
+						<AbsDimension x="250" y="64" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="108" y="-180"/>
+								<AbsDimension x="108" y="-180" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</Texture>
 				<Texture name="ReadyFrameHeaderBox2" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
-						<AbsDimension x="200" y="64"/>
+						<AbsDimension x="200" y="64" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-2" y="-180"/>
+								<AbsDimension x="-2" y="-180" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</Texture>
 				<Texture name="ReadyFrameHeaderBox" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
-						<AbsDimension x="330" y="64"/>
+						<AbsDimension x="330" y="64" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-130" y="-180"/>
+								<AbsDimension x="-130" y="-180" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</Texture>
-
 				<FontString inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_READYCHECK_TITLE">
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-130" y="-195"/>
+								<AbsDimension x="-130" y="-195" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</FontString>
-
 				<Texture name="FlareFrameHeaderBox3" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
-						<AbsDimension x="250" y="64"/>
+						<AbsDimension x="250" y="64" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="108" y="-300"/>
+								<AbsDimension x="108" y="-300" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</Texture>
 				<Texture name="FlareFrameHeaderBox2" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
-						<AbsDimension x="200" y="64"/>
+						<AbsDimension x="200" y="64" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-2" y="-300"/>
+								<AbsDimension x="-2" y="-300" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</Texture>
 				<Texture name="FlareFrameHeaderBox" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
-						<AbsDimension x="330" y="64"/>
+						<AbsDimension x="330" y="64" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-130" y="-300"/>
+								<AbsDimension x="-130" y="-300" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</Texture>
-
 				<FontString inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_FLARE_TITLE">
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-130" y="-315"/>
+								<AbsDimension x="-130" y="-315" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</FontString>
 				<Texture name="ProfileFrameHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
-						<AbsDimension x="330" y="64"/>
+						<AbsDimension x="330" y="64" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-130" y="-460"/>
+								<AbsDimension x="-130" y="-460" />
 							</Offset>
 						</Anchor>
 					</Anchors>
@@ -272,98 +254,124 @@
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-130" y="-475"/>
+								<AbsDimension x="-130" y="-475" />
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString  ID="PresetOptions" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" text="TARGETCHARMS_OPTIONS_PRESETS_TITLE">
-					<FontHeight><AbsValue val="10" /></FontHeight>
+				<FontString ID="PresetOptions" inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_PRESETS_TITLE">
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-175" y="-154"/>
+								<AbsDimension x="-175" y="-154" />
 							</Offset>
 						</Anchor>
 					</Anchors>
+					<FontHeight>
+						<AbsValue val="10" />
+					</FontHeight>
 				</FontString>
-				<FontString  ID="FlarePresetOptions" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" text="TARGETCHARMS_OPTIONS_PRESETS_TITLE">
-					<FontHeight><AbsValue val="10" /></FontHeight>
+				<FontString ID="FlarePresetOptions" inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_PRESETS_TITLE">
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
-								<AbsDimension x="-175" y="-434"/>
+								<AbsDimension x="-175" y="-434" />
 							</Offset>
 						</Anchor>
 					</Anchors>
+					<FontHeight>
+						<AbsValue val="10" />
+					</FontHeight>
 				</FontString>
 			</Layer>
 		</Layers>
-    <Frames>
+		<Frames>
 			<Button name="CloseButton">
 				<Size>
-					<AbsDimension x="32" y="32"/>
+					<AbsDimension x="32" y="32" />
 				</Size>
 				<Anchors>
-					<Anchor point="TOPRIGHT">
+					<Anchor x="5" y="-3" point="TOPRIGHT" />
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\BUTTONS\UI-Panel-MinimizeButton-Up" />
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnClick>
+						HideSetup();
+					</OnClick>
+				</Scripts>
+				<PushedTexture file="Interface\BUTTONS\UI-Panel-MinimizeButton-Down" alphaMode="ADD" />
+				<DisabledTexture file="Interface\BUTTONS\UI-Panel-MinimizeButton-Disabled" alphaMode="ADD" />
+				<HighlightTexture file="Interface\BUTTONS\UI-Panel-MinimizeButton-Up" alphaMode="ADD" />
+			</Button>
+			<EditBox name="EditBox" enableMouse="true">
+				<Size>
+					<AbsDimension x="145" y="22" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="0" y="0"/>
+							<AbsDimension x="145" y="-147" />
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Layers>
 					<Layer level="BACKGROUND">
-						<Texture file="Interface\BUTTONS\UI-Panel-MinimizeButton-Up">
+						<Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
+							<Size>
+								<AbsDimension x="8" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset>
+										<AbsDimension x="-4" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.0625" top="0" bottom="0.625" />
 						</Texture>
-  					</Layer>
-				</Layers>	
-				<PushedTexture alphaMode="ADD" file="Interface\BUTTONS\UI-Panel-MinimizeButton-Down"/>
-				<HighlightTexture alphaMode="ADD" file="Interface\BUTTONS\UI-Panel-MinimizeButton-Up"/>
-				<DisabledTexture  alphaMode="ADD" file="Interface\BUTTONS\UI-Panel-MinimizeButton-Disabled" />
-				<Scripts>					
-					<OnClick>
-						HideSetup();
-					</OnClick>
-				</Scripts>
-			</Button>	
-      	
-      <EditBox name="EditBox" enableMouse="true">
-        <Size><AbsDimension x="145" y="22" /></Size>
-        <Anchors><Anchor point="TOP"><Offset><AbsDimension x="145" y="-147" /></Offset></Anchor></Anchors>
-        <Layers>
-	  <Layer>
-            <FontString name="$parentLabel" font="Fonts\FRIZQT__.TTF" text="TARGETCHARMS_OPTIONS_LAYOUT_TEXT">
-              <Anchors><Anchor point="RIGHT" relativePoint="LEFT"><Offset><AbsDimension x="-10" y="0" /></Offset></Anchor></Anchors>
-              <FontHeight><AbsValue val="10" /></FontHeight>
-              <Color r="1" g="0.8196079" b="0" />
-              <Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
-            </FontString>
-          </Layer>
-          <Layer level="BACKGROUND">
-            <Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
-              <Size><AbsDimension x="8" y="20" /></Size>
-	      <Anchors><Anchor point="LEFT"><Offset><AbsDimension x="-4" y="0" /></Offset></Anchor></Anchors>
-              <TexCoords left="0" right="0.0625" top="0" bottom="0.625" />
-            </Texture>
-            <Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
-              <Size><AbsDimension x="8" y="20" /></Size>
-              <Anchors><Anchor point="RIGHT" /></Anchors>
-              <TexCoords left="0.9375" right="1" top="0" bottom="0.625" />
-            </Texture>
-            <Texture name="$parentMiddle" file="Interface\Common\Common-Input-Border">
-              <Size><AbsDimension x="10" y="20" /></Size>
-              <Anchors><Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" /><Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT" /></Anchors>
-              <TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625" />
-            </Texture>
-          </Layer>
-        </Layers>
-        <FontString font="Fonts\ARIALN.TTF">
-          <FontHeight><AbsValue val="14" /></FontHeight>
-          <Color r="1" g="1" b="1" />
-          <Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
-        </FontString>
+						<Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
+							<Size>
+								<AbsDimension x="8" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="RIGHT" />
+							</Anchors>
+							<TexCoords left="0.9375" right="1" top="0" bottom="0.625" />
+						</Texture>
+						<Texture name="$parentMiddle" file="Interface\Common\Common-Input-Border">
+							<Size>
+								<AbsDimension x="10" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+								<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT" />
+							</Anchors>
+							<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625" />
+						</Texture>
+					</Layer>
+					<Layer>
+						<FontString name="$parentLabel" inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_LAYOUT_TEXT">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-10" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="10" />
+							</FontHeight>
+							<Color r="1" g="0.8196079" />
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
+
 					</OnLoad>
 					<OnShow>
 						EditBox:SetText(TargetCharms_Options["TargetCharms"]["buttonTemplate"]);
@@ -376,12 +384,25 @@
 						HideSetup();
 					</OnEscapePressed>
 				</Scripts>
-      </EditBox>
-			<CheckButton name="DraggableToggleButton" inherits="OptionsCheckButtonTemplate">
+				<FontString font="Fonts\ARIALN.TTF">
+					<FontHeight>
+						<AbsValue val="14" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+						<Color />
+					</Shadow>
+				</FontString>
+			</EditBox>
+			<CheckButton name="DraggableToggleButton" inherits="UICheckButtonTemplate" text="TARGETCHARMS_OPTIONS_DRAG">
+				<Size x="29" y="29" />
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="75" y="4"/>
+							<AbsDimension x="68" y="6" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -397,12 +418,12 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-
-			<CheckButton name="EnabledButton" inherits="OptionsCheckButtonTemplate">
+			<CheckButton name="EnabledButton" inherits="UICheckButtonTemplate" text="TARGETCHARMS_OPTIONS_ENABLE">
+				<Size x="29" y="29" />
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="-25" y="4"/>
+							<AbsDimension x="-30" y="6" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -418,11 +439,11 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="PartyToggleButton" inherits="OptionsCheckButtonTemplate">
+			<CheckButton name="PartyToggleButton" inherits="UICheckButtonTemplate">
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="-185" y="-30"/>
+							<AbsDimension x="-185" y="-30" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -438,22 +459,17 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-
-			
-
-			
-      
-			<CheckButton name="TargetToggleButton" inherits="OptionsCheckButtonTemplate">
+			<CheckButton name="TargetToggleButton" inherits="UICheckButtonTemplate">
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="0" y="-30"/>
+							<AbsDimension x="0" y="-30" />
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_SHOWONTARGET);						
+						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_SHOWONTARGET);
 					</OnLoad>
 					<OnShow>
 						TargetToggleButton:SetChecked(TargetCharms_Options["TargetCharms"]["showontarget"]);
@@ -464,17 +480,17 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="IconToggleButton" inherits="OptionsCheckButtonTemplate">
+			<CheckButton name="IconToggleButton" inherits="UICheckButtonTemplate">
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="-185" y="-60"/>
+							<AbsDimension x="-185" y="-60" />
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_TOGGLEICON);						
+						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_TOGGLEICON);
 					</OnLoad>
 					<OnShow>
 						IconToggleButton:SetChecked(TargetCharms_Options["TargetCharms"]["toggleicon"]);
@@ -484,9 +500,9 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			<Slider name="ScaleSlider" inherits="OptionsSliderTemplate">
+			<Slider name="ScaleSlider" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="100" y="16"/>
+					<AbsDimension x="100" y="16" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
@@ -495,18 +511,26 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_SCALE);
 						_G[self:GetName().."High"]:SetText();
 						_G[self:GetName().."Low"]:SetText();
 						ScaleSlider:SetMinMaxValues(0.02,2);
-						ScaleSlider:SetValueStep(0.02);						
+						ScaleSlider:SetValueStep(0.02);
 					</OnLoad>
 					<OnShow>
 						ScaleSlider:SetValue(TargetCharms_Options["TargetCharms"]["barscale"]);
@@ -519,9 +543,9 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-			<Slider name="AlphaSlider" inherits="OptionsSliderTemplate">
+			<Slider name="AlphaSlider" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="100" y="16"/>
+					<AbsDimension x="100" y="16" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
@@ -530,18 +554,26 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_OPACITY);
 						_G[self:GetName().."High"]:SetText();
 						_G[self:GetName().."Low"]:SetText();
 						AlphaSlider:SetMinMaxValues(0,1);
-						AlphaSlider:SetValueStep(0.05);						
+						AlphaSlider:SetValueStep(0.05);
 					</OnLoad>
 					<OnShow>
 						AlphaSlider:SetValue(TargetCharms_Options["TargetCharms"]["alphaVal"]);
@@ -554,10 +586,9 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-
-			<Slider name="XSlider" inherits="OptionsSliderTemplate">
+			<Slider name="XSlider" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="100" y="16"/>
+					<AbsDimension x="100" y="16" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
@@ -566,11 +597,19 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_XSPACING);
@@ -590,15 +629,10 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-			<Slider name="YSlider" inherits="OptionsSliderTemplate">
+			<Slider name="YSlider" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="100" y="16"/>
+					<AbsDimension x="100" y="16" />
 				</Size>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
@@ -606,6 +640,19 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_YSPACING);
@@ -625,45 +672,71 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-
-
-	<EditBox name="FlareEditBox" enableMouse="true">
-        <Size><AbsDimension x="145" y="22" /></Size>
-        <Anchors><Anchor point="TOP"><Offset><AbsDimension x="145" y="-427" /></Offset></Anchor></Anchors>
-        <Layers>
-	  <Layer>
-            <FontString name="$parentLabel" font="Fonts\FRIZQT__.TTF" text="TARGETCHARMS_OPTIONS_LAYOUT_TEXT">
-              <Anchors><Anchor point="RIGHT" relativePoint="LEFT"><Offset><AbsDimension x="-10" y="0" /></Offset></Anchor></Anchors>
-              <FontHeight><AbsValue val="10" /></FontHeight>
-              <Color r="1" g="0.8196079" b="0" />
-              <Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
-            </FontString>
-          </Layer>
-          <Layer level="BACKGROUND">
-            <Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
-              <Size><AbsDimension x="8" y="20" /></Size>
-	      <Anchors><Anchor point="LEFT"><Offset><AbsDimension x="-4" y="0" /></Offset></Anchor></Anchors>
-              <TexCoords left="0" right="0.0625" top="0" bottom="0.625" />
-            </Texture>
-            <Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
-              <Size><AbsDimension x="8" y="20" /></Size>
-              <Anchors><Anchor point="RIGHT" /></Anchors>
-              <TexCoords left="0.9375" right="1" top="0" bottom="0.625" />
-            </Texture>
-            <Texture name="$parentMiddle" file="Interface\Common\Common-Input-Border">
-              <Size><AbsDimension x="10" y="20" /></Size>
-              <Anchors><Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" /><Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT" /></Anchors>
-              <TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625" />
-            </Texture>
-          </Layer>
-        </Layers>
-        <FontString font="Fonts\ARIALN.TTF">
-          <FontHeight><AbsValue val="14" /></FontHeight>
-          <Color r="1" g="1" b="1" />
-          <Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
-        </FontString>
+			<EditBox name="FlareEditBox" enableMouse="true">
+				<Size>
+					<AbsDimension x="145" y="22" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="145" y="-427" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
+							<Size>
+								<AbsDimension x="8" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset>
+										<AbsDimension x="-4" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.0625" top="0" bottom="0.625" />
+						</Texture>
+						<Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
+							<Size>
+								<AbsDimension x="8" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="RIGHT" />
+							</Anchors>
+							<TexCoords left="0.9375" right="1" top="0" bottom="0.625" />
+						</Texture>
+						<Texture name="$parentMiddle" file="Interface\Common\Common-Input-Border">
+							<Size>
+								<AbsDimension x="10" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+								<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT" />
+							</Anchors>
+							<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625" />
+						</Texture>
+					</Layer>
+					<Layer>
+						<FontString name="$parentLabel" inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_LAYOUT_TEXT">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-10" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="10" />
+							</FontHeight>
+							<Color r="1" g="0.8196079" />
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
+
 					</OnLoad>
 					<OnShow>
 						FlareEditBox:SetText(TargetCharms_Options["FlareCharms"]["buttonTemplate"]);
@@ -680,12 +753,25 @@
 						HideSetup();
 					</OnEscapePressed>
 				</Scripts>
-      	</EditBox>
-			<CheckButton name="FlareDraggableToggleButton" inherits="OptionsCheckButtonTemplate">
+				<FontString font="Fonts\ARIALN.TTF">
+					<FontHeight>
+						<AbsValue val="14" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+						<Color />
+					</Shadow>
+				</FontString>
+			</EditBox>
+			<CheckButton name="FlareDraggableToggleButton" inherits="UICheckButtonTemplate">
+				<Size x="29" y="29" />
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="75" y="-308"/>
+							<AbsDimension x="68" y="-306" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -702,12 +788,12 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-
-			<CheckButton name="FlareEnabledButton" inherits="OptionsCheckButtonTemplate">
+			<CheckButton name="FlareEnabledButton" inherits="UICheckButtonTemplate">
+				<Size x="29" y="29" />
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="-25" y="-308"/>
+							<AbsDimension x="-30" y="-306" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -723,11 +809,11 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="FlarePartyToggleButton" inherits="OptionsCheckButtonTemplate">
+			<CheckButton name="FlarePartyToggleButton" inherits="UICheckButtonTemplate">
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="-185" y="-340"/>
+							<AbsDimension x="-185" y="-340" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -743,32 +829,30 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="FlareShowIconsToggleButton" inherits="OptionsCheckButtonTemplate">
+			<CheckButton name="FlareShowIconsToggleButton" inherits="UICheckButtonTemplate">
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="10" y="-340"/>
+							<AbsDimension x="10" y="-340" />
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_SHOWICONS);						
+						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_SHOWICONS);
 					</OnLoad>
 					<OnShow>
 						FlareShowIconsToggleButton:SetChecked(TargetCharms_Options["FlareCharms"]["showicons"]);
 					</OnShow>
 					<OnClick>
-						
 						TargetCharms_Options["FlareCharms"]["showicons"] = FlareShowIconsToggleButton:GetChecked();
 						SetupButtons("FlareCharms","FlareCharms");
-						
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			<Slider name="FlareScaleSlider" inherits="OptionsSliderTemplate">
+			<Slider name="FlareScaleSlider" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="100" y="16"/>
+					<AbsDimension x="100" y="16" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
@@ -777,35 +861,41 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_SCALE);
 						_G[self:GetName().."High"]:SetText();
 						_G[self:GetName().."Low"]:SetText();
 						FlareScaleSlider:SetMinMaxValues(0.2,2);
-						FlareScaleSlider:SetValueStep(0.02);						
+						FlareScaleSlider:SetValueStep(0.02);
 					</OnLoad>
 					<OnShow>
 						FlareScaleSlider:SetValue(TargetCharms_Options["FlareCharms"]["barscale"]);
 						_G[self:GetName().."ValueText"]:SetText(string.format("%.2f",FlareScaleSlider:GetValue()));
 					</OnShow>
 					<OnValueChanged>
-						
 						TargetCharms_Options["FlareCharms"]["barscale"] = FlareScaleSlider:GetValue();
 						SetFrameScale(TargetCharms_Options["FlareCharms"]["barscale"],5);
 						_G[self:GetName().."ValueText"]:SetText(string.format("%.2f",FlareScaleSlider:GetValue()));
-						
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-			<Slider name="FlareAlphaSlider" inherits="OptionsSliderTemplate">
+			<Slider name="FlareAlphaSlider" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="100" y="16"/>
+					<AbsDimension x="100" y="16" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
@@ -814,18 +904,26 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_OPACITY);
 						_G[self:GetName().."High"]:SetText();
 						_G[self:GetName().."Low"]:SetText();
 						FlareAlphaSlider:SetMinMaxValues(0,1);
-						FlareAlphaSlider:SetValueStep(0.05);						
+						FlareAlphaSlider:SetValueStep(0.05);
 					</OnLoad>
 					<OnShow>
 						FlareAlphaSlider:SetValue(TargetCharms_Options["FlareCharms"]["alphaVal"]);
@@ -838,10 +936,9 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-
-			<Slider name="FlareXSlider" inherits="OptionsSliderTemplate">
+			<Slider name="FlareXSlider" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="100" y="16"/>
+					<AbsDimension x="100" y="16" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
@@ -850,11 +947,19 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_XSPACING);
@@ -868,23 +973,16 @@
 						_G[self:GetName().."ValueText"]:SetText(FlareXSlider:GetValue());
 					</OnShow>
 					<OnValueChanged>
-						
 						TargetCharms_Options["FlareCharms"]["Xspacing"] = FlareXSlider:GetValue();
 						SetupButtons("FlareCharms","FlareCharms");
 						_G[self:GetName().."ValueText"]:SetText(FlareXSlider:GetValue());
-						
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-			<Slider name="FlareYSlider" inherits="OptionsSliderTemplate">
+			<Slider name="FlareYSlider" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="100" y="16"/>
+					<AbsDimension x="100" y="16" />
 				</Size>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
@@ -892,6 +990,19 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_YSPACING);
@@ -905,52 +1016,77 @@
 						_G[self:GetName().."ValueText"]:SetText(FlareYSlider:GetValue());
 					</OnShow>
 					<OnValueChanged>
-						
 						TargetCharms_Options["FlareCharms"]["Yspacing"] = FlareYSlider:GetValue();
 						SetupButtons("FlareCharms","FlareCharms");
 						_G[self:GetName().."ValueText"]:SetText(FlareYSlider:GetValue());
-						
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-			
-		<EditBox name="EditBox2" enableMouse="true">
-       			 <Size><AbsDimension x="115" y="22" /></Size>
-  			      <Anchors><Anchor point="TOP"><Offset><AbsDimension x="100" y="-222" /></Offset></Anchor></Anchors>
-   			     <Layers>
-				  <Layer>
-   				         <FontString name="$parentLabel" font="Fonts\FRIZQT__.TTF" text="TARGETCHARMS_OPTIONS_READYCHECK_TEXT">
-    				          <Anchors><Anchor point="RIGHT" relativePoint="LEFT"><Offset><AbsDimension x="-10" y="0" /></Offset></Anchor></Anchors>
-    				          <FontHeight><AbsValue val="10" /></FontHeight>
-    				          <Color r="1" g="0.8196079" b="0" />
-     				         <Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
-      				      </FontString>
-    			      </Layer>
-         			 <Layer level="BACKGROUND">
-          				  <Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
-           				      <Size><AbsDimension x="8" y="20" /></Size>
-				              <Anchors><Anchor point="LEFT"><Offset><AbsDimension x="-4" y="0" /></Offset></Anchor></Anchors>
-    					      <TexCoords left="0" right="0.0625" top="0" bottom="0.625" />
-     					   </Texture>
-     					   <Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
-     					        <Size><AbsDimension x="8" y="20" /></Size>
-      					        <Anchors><Anchor point="RIGHT" /></Anchors>
-    					         <TexCoords left="0.9375" right="1" top="0" bottom="0.625" />
-    					   </Texture>
-    					   <Texture name="$parentMiddle" file="Interface\Common\Common-Input-Border">
-   				           	<Size><AbsDimension x="10" y="20" /></Size>
-  				            	<Anchors><Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" /><Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT" /></Anchors>
- 				             	<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625" />
- 				           </Texture>
- 				         </Layer>
- 			       </Layers>
-   			     <FontString font="Fonts\ARIALN.TTF">
-  			        <FontHeight><AbsValue val="14" /></FontHeight>
-  				        <Color r="1" g="1" b="1" />
-  			        <Shadow><Color r="0" g="0" b="0" /><Offset><AbsDimension x="1" y="-1" /></Offset></Shadow>
-  			      </FontString>
+			<EditBox name="EditBox2" enableMouse="true">
+				<Size>
+					<AbsDimension x="115" y="22" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="100" y="-224" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
+							<Size>
+								<AbsDimension x="8" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset>
+										<AbsDimension x="-4" y="0" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.0625" top="0" bottom="0.625" />
+						</Texture>
+						<Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
+							<Size>
+								<AbsDimension x="8" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="RIGHT" />
+							</Anchors>
+							<TexCoords left="0.9375" right="1" top="0" bottom="0.625" />
+						</Texture>
+						<Texture name="$parentMiddle" file="Interface\Common\Common-Input-Border">
+							<Size>
+								<AbsDimension x="10" y="20" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+								<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT" />
+							</Anchors>
+							<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625" />
+						</Texture>
+					</Layer>
+					<Layer>
+						<FontString name="$parentLabel" inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_READYCHECK_TEXT">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT">
+									<Offset>
+										<AbsDimension x="-10" y="-2" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="10" />
+							</FontHeight>
+							<Color r="1" g="0.8196079" />
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
+
 					</OnLoad>
 					<OnShow>
 						EditBox2:SetText(TargetCharms_Options["ReadyCharm"]["text"]);
@@ -961,19 +1097,33 @@
 					</OnTextChanged>
 					<OnEscapePressed>
 						HideSetup();
-					</OnEscapePressed>				</Scripts>
-     			 </EditBox>
-			<CheckButton name="DraggableToggleButton2" inherits="OptionsCheckButtonTemplate">
+					</OnEscapePressed>
+				</Scripts>
+				<FontString font="Fonts\ARIALN.TTF">
+					<FontHeight>
+						<AbsValue val="14" />
+					</FontHeight>
+					<Color r="1" g="1" b="1" />
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+						<Color />
+					</Shadow>
+				</FontString>
+			</EditBox>
+			<CheckButton name="DraggableToggleButton2" inherits="UICheckButtonTemplate">
+				<Size x="29" y="29" />
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="75" y="-188"/>
+							<AbsDimension x="68" y="-186" />
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_DRAG);						
+						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_DRAG);
 					</OnLoad>
 					<OnShow>
 						DraggableToggleButton2:SetChecked(TargetCharms_Options["ReadyCharm"]["draggable"]);
@@ -983,11 +1133,12 @@
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="EnabledButton2" inherits="OptionsCheckButtonTemplate">
+			<CheckButton name="EnabledButton2" inherits="UICheckButtonTemplate">
+				<Size x="29" y="29" />
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="-25" y="-188"/>
+							<AbsDimension x="-30" y="-186" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -1002,12 +1153,12 @@
 						TargetCharms_Options["ReadyCharm"]["enabled"] = EnabledButton2:GetChecked();
 					</OnClick>
 				</Scripts>
-			</CheckButton>-
-			<CheckButton name="PartyToggleButton2" inherits="OptionsCheckButtonTemplate">
+			</CheckButton>
+			<CheckButton name="PartyToggleButton2" inherits="UICheckButtonTemplate">
 				<Anchors>
 					<Anchor point="TOP">
 						<Offset>
-							<AbsDimension x="-185" y="-220"/>
+							<AbsDimension x="-185" y="-220" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -1022,10 +1173,10 @@
 						TargetCharms_Options["ReadyCharm"]["partyOnly"] = PartyToggleButton2:GetChecked();
 					</OnClick>
 				</Scripts>
-			</CheckButton>			
-			<Slider name="ScaleSlider2" inherits="OptionsSliderTemplate">
+			</CheckButton>
+			<Slider name="ScaleSlider2" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="130" y="16"/>
+					<AbsDimension x="130" y="16" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
@@ -1034,18 +1185,26 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_SCALE);
 						_G[self:GetName().."High"]:SetText();
 						_G[self:GetName().."Low"]:SetText();
 						ScaleSlider2:SetMinMaxValues(0.02,2);
-						ScaleSlider2:SetValueStep(0.02);						
+						ScaleSlider2:SetValueStep(0.02);
 					</OnLoad>
 					<OnShow>
 						ScaleSlider2:SetValue(TargetCharms_Options["ReadyCharm"]["barscale"]);
@@ -1058,10 +1217,9 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-
-			<Slider name="AlphaSlider2" inherits="OptionsSliderTemplate">
+			<Slider name="AlphaSlider2" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="130" y="16"/>
+					<AbsDimension x="130" y="16" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
@@ -1070,18 +1228,26 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_OPACITY);
 						_G[self:GetName().."High"]:SetText();
 						_G[self:GetName().."Low"]:SetText();
 						AlphaSlider2:SetMinMaxValues(0,1);
-						AlphaSlider2:SetValueStep(0.05);						
+						AlphaSlider2:SetValueStep(0.05);
 					</OnLoad>
 					<OnShow>
 						AlphaSlider2:SetValue(TargetCharms_Options["ReadyCharm"]["alphaVal"]);
@@ -1094,10 +1260,9 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-
-			<Slider name="WidthSlider2" inherits="OptionsSliderTemplate">
+			<Slider name="WidthSlider2" inherits="OptionsSliderTemplate" minValue="0" maxValue="0">
 				<Size>
-					<AbsDimension x="130" y="16"/>
+					<AbsDimension x="130" y="16" />
 				</Size>
 				<Anchors>
 					<Anchor point="TOP">
@@ -1106,11 +1271,19 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<Layers><Layer>
-					<FontString name="$parentValueText" inherits="GameFontNormal">
-						<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-18"/></Offset></Anchor></Anchors>
-					</FontString>
-				</Layer></Layers>
+				<Layers>
+					<Layer>
+						<FontString name="$parentValueText" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-18" />
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_WIDTH);
@@ -1131,18 +1304,17 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-
-			<CheckButton name="MainProfileButton" inherits="OptionsCheckButtonTemplate">
+			<CheckButton name="MainProfileButton" inherits="UICheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOP">
+					<Anchor point="TOPLEFT">
 						<Offset>
-							<AbsDimension x="-200" y="-500"/>
+							<AbsDimension x="30" y="-500" />
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_MAIN_PROFILE);						
+						_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_MAIN_PROFILE);
 					</OnLoad>
 					<OnShow>
 						MainProfileButton:SetChecked(TargetCharms_OptionsGlobal["Name"]==UnitName("player"));
@@ -1155,100 +1327,104 @@
 							TargetCharms_OptionsGlobal["Name"] = nil;
 							CopyButton:Show();
 						end
-						
 					</OnClick>
 				</Scripts>
 			</CheckButton>
-
-			<Button name="CopyButton" inherits="OptionsButtonTemplate" text="TARGETCHARMS_OPTIONS_COPY_BUTTON">
+			<Button name="CopyButton" inherits="UIPanelButtonTemplate" text="TARGETCHARMS_OPTIONS_COPY_BUTTON">
 				<Size>
-					<AbsDimension x="200" y="20"/>
+					<AbsDimension x="425" y="30" />
 				</Size>
 				<Anchors>
-					<Anchor point="TOP">
-						<Offset>
-							<AbsDimension x="100" y="-502"/>
-						</Offset>
+					<Anchor point="TOPLEFT">
+						<Offset x="33" y="-530" />
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnShow>
 						if TargetCharms_OptionsGlobal["Name"]==UnitName("player") or TargetCharms_OptionsGlobal["Name"]==nil then
-							self:Hide() 
+							self:Hide()
 						else
 							_G[self:GetName().."Text"]:SetText(TARGETCHARMS_OPTIONS_COPY_BUTTON..TargetCharms_OptionsGlobal["Name"]);
 							self:Show()
 						end
-					</OnShow>					
+					</OnShow>
 					<OnClick>
 						CopySetup();
 					</OnClick>
 				</Scripts>
-			</Button>		
-    </Frames>
-	<Scripts>
-		<OnLoad>
-			self:SetMovable(true);
-		</OnLoad>
-
-		<OnMouseDown>
-			self:StartMoving();
-		</OnMouseDown>
-		<OnMouseUp>								
-			self:StopMovingOrSizing();
-		</OnMouseUp>
-  		<OnHide>
-			LockFlares();
-			SetupButtons("TargetCharms","TargetCharms");
-			CheckFrameViewState(); 
-			CheckReadyButtonViewState();
-			CheckFlareFrameViewState();
-		</OnHide>
-	</Scripts>
-  </Frame>
-			<Button name="PresetOptionsTemplate" ID="1" inherits="OptionsButtonTemplate" virtual="true">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
+				<NormalFont style="GameNormalFont" />
+			</Button>
+			<Frame name="OptionsFrameBackground" parentKey="" parentArray="" inherits="BackdropTemplate" frameStrata="BACKGROUND">
+				<Size x="497" y="574" />
 				<Anchors>
-					<Anchor point="TOP">
-						<Offset>
-							<AbsDimension x="-85" y="-148"/>
-						</Offset>
-					</Anchor>
+					<Anchor x="-7" point="TOPLEFT" />
 				</Anchors>
-				<Scripts>
-					<OnLoad>
-						_G[self:GetName().."Text"]:SetText(self:GetID());						
-					</OnLoad>					
-					<OnClick>
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+				</KeyValues>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:SetMovable(true);
+			</OnLoad>
+			<OnMouseDown>
+				self:StartMoving();
+			</OnMouseDown>
+			<OnMouseUp>
+				self:StopMovingOrSizing();
+			</OnMouseUp>
+			<OnHide>
+				LockFlares();
+				SetupButtons("TargetCharms","TargetCharms");
+				CheckFrameViewState();
+				CheckReadyButtonViewState();
+				CheckFlareFrameViewState();
+			</OnHide>
+		</Scripts>
+	</Frame>
+	<Button ID="1" name="PresetOptionsTemplate" inherits="OptionsButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="20" y="20" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOP">
+				<Offset>
+					<AbsDimension x="-85" y="-148" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+						_G[self:GetName().."Text"]:SetText(self:GetID());
+			</OnLoad>
+			<OnClick>
 						local i = self:GetID();
 						local tmpEditBox = _G["EditBox"];
 						tmpEditBox:SetText(TargetCharms_LayoutDefaults[i][2]);
-					</OnClick>
-				</Scripts>
-			</Button>	
-			<Button name="FlarePresetOptionsTemplate" ID="1" inherits="OptionsButtonTemplate" virtual="true">
-				<Size>
-					<AbsDimension x="20" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOP">
-						<Offset>
-							<AbsDimension x="-85" y="-428"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnLoad>
-						_G[self:GetName().."Text"]:SetText(self:GetID());						
-					</OnLoad>					
-					<OnClick>
+			</OnClick>
+		</Scripts>
+	</Button>
+	<Button ID="1" name="FlarePresetOptionsTemplate" inherits="OptionsButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="20" y="20" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOP">
+				<Offset>
+					<AbsDimension x="-85" y="-428" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+						_G[self:GetName().."Text"]:SetText(self:GetID());
+			</OnLoad>
+			<OnClick>
 						local i = self:GetID();
 						local tmpEditBox = _G["FlareEditBox"];
 						tmpEditBox:SetText(Flare_LayoutDefaults[i][2]);
-					</OnClick>
-				</Scripts>
-			</Button>	
-
+			</OnClick>
+		</Scripts>
+	</Button>
 </Ui>
