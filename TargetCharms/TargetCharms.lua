@@ -1,5 +1,5 @@
 TARGETCHARMS_VERSION = GetAddOnMetadata("TargetCharms", "Version");
-TARGETCHARMS_DB_VERSION = "1.6.2";
+TARGETCHARMS_DB_VERSION = "1.6.4";
 
 local Defaults = {
     ["TargetCharms"] = {
