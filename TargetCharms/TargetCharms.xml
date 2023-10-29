@@ -125,7 +125,7 @@
 		<Size><AbsDimension x="50" y="20"/></Size>
 		<Anchors><Anchor point="TOPLEFT" relativePoint="TOP"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>			
 			<Frames>	
-					<Button name="ReadyCharm" inherits="OptionsButtonTemplate">						
+					<Button name="ReadyCharm" inherits="UIPanelButtonTemplate">						
 						<Size>
 							<AbsDimension x="50" y="20"/>
 						</Size>

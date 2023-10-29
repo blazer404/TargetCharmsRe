@@ -7,7 +7,7 @@
 			<Anchor point="CENTER" />
 		</Anchors>
 		<Frames>
-			<Button ID="1" name="PanelShowButton" inherits="OptionsButtonTemplate">
+			<Button ID="1" name="PanelShowButton" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="200" y="20" />
 				</Size>
@@ -27,7 +27,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button ID="1" name="PanelResetButton" inherits="OptionsButtonTemplate">
+			<Button ID="1" name="PanelResetButton" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="200" y="20" />
 				</Size>
@@ -1383,7 +1383,7 @@
 			</OnHide>
 		</Scripts>
 	</Frame>
-	<Button ID="1" name="PresetOptionsTemplate" inherits="OptionsButtonTemplate" virtual="true">
+	<Button ID="1" name="PresetOptionsTemplate" inherits="UIPanelButtonTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="20" y="20" />
 		</Size>
@@ -1405,7 +1405,7 @@
 			</OnClick>
 		</Scripts>
 	</Button>
-	<Button ID="1" name="FlarePresetOptionsTemplate" inherits="OptionsButtonTemplate" virtual="true">
+	<Button ID="1" name="FlarePresetOptionsTemplate" inherits="UIPanelButtonTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="20" y="20" />
 		</Size>
