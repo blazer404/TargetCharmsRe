@@ -1,4 +1,4 @@
-<Ui xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd" xmlns="http://www.blizzard.com/wow/ui/">
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Frame name="TargetCharmsPanelTemplate" virtual="true" hidden="true" parent="UIParent" toplevel="true" frameStrata="DIALOG" enableMouse="true" enableKeyboard="true">
 		<Size>
 			<AbsDimension x="480" y="570" />
@@ -7,7 +7,7 @@
 			<Anchor point="CENTER" />
 		</Anchors>
 		<Frames>
-			<Button ID="1" name="PanelShowButton" inherits="UIPanelButtonTemplate">
+			<Button id="1" name="PanelShowButton" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="200" y="20" />
 				</Size>
@@ -27,7 +27,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button ID="1" name="PanelResetButton" inherits="UIPanelButtonTemplate">
+			<Button id="1" name="PanelResetButton" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="200" y="20" />
 				</Size>
@@ -259,7 +259,7 @@
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString ID="PresetOptions" inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_PRESETS_TITLE">
+				<FontString name="PresetOptions" inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_PRESETS_TITLE">
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
@@ -271,7 +271,7 @@
 						<AbsValue val="10" />
 					</FontHeight>
 				</FontString>
-				<FontString ID="FlarePresetOptions" inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_PRESETS_TITLE">
+				<FontString name="FlarePresetOptions" inherits="GameFontNormal" text="TARGETCHARMS_OPTIONS_PRESETS_TITLE">
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
@@ -1383,7 +1383,7 @@
 			</OnHide>
 		</Scripts>
 	</Frame>
-	<Button ID="1" name="PresetOptionsTemplate" inherits="UIPanelButtonTemplate" virtual="true">
+	<Button id="1" name="PresetOptionsTemplate" inherits="UIPanelButtonTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="20" y="20" />
 		</Size>
@@ -1405,7 +1405,7 @@
 			</OnClick>
 		</Scripts>
 	</Button>
-	<Button ID="1" name="FlarePresetOptionsTemplate" inherits="UIPanelButtonTemplate" virtual="true">
+	<Button id="1" name="FlarePresetOptionsTemplate" inherits="UIPanelButtonTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="20" y="20" />
 		</Size>
