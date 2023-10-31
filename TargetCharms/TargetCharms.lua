@@ -284,7 +284,7 @@ function TargetCharms_OnEvent(self, event)
 
         panel.name = "TargetCharms";
         panel.okay = function(self)
-            TargetCharmsInterface_Close();
+            -- TargetCharmsInterface_Close();
         end;
         panel.cancel = function(self)
             TargetCharmsPanel_CancelOrLoad();
