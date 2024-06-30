@@ -7,6 +7,6 @@
 ## SavedVariables: TargetCharms_OptionsGlobal
 ## SavedVariablesPerCharacter: TargetCharms_Options
 
-Locales\locales.xml
+Locales.lua
 TargetCharms.xml
 TargetCharmsSetup.xml
