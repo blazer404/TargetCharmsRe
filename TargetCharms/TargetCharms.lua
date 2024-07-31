@@ -62,6 +62,30 @@ local texturePaths = {
     "interface\\icons\\ability_hunter_snipershot.blp"
 };
 
+--this is a copy of deleted deprecated function
+local InterfaceOptions_AddCategory = InterfaceOptions_AddCategory
+if not InterfaceOptions_AddCategory then
+	function InterfaceOptions_AddCategory(frame, addOn, position)
+		-- cancel is no longer a default option. May add menu extension for this.
+		frame.OnCommit = frame.okay;
+		frame.OnDefault = frame.default;
+		frame.OnRefresh = frame.refresh;
+
+		if frame.parent then
+			local category = Settings.GetCategory(frame.parent);
+			local subcategory, layout = Settings.RegisterCanvasLayoutSubcategory(category, frame, frame.name, frame.name);
+			subcategory.ID = frame.name;
+			return subcategory, category;
+		else
+			local category, layout = Settings.RegisterCanvasLayoutCategory(frame, frame.name, frame.name);
+			category.ID = frame.name;
+			Settings.RegisterAddOnCategory(category);
+			return category;
+		end
+	end
+end
+
+
 function TargetCharms_msg(text)
     DEFAULT_CHAT_FRAME:AddMessage(TARGETCHARMS_MSG_TAG .. text);
 end
@@ -753,6 +777,9 @@ function HideSetup()
         setupFrame:Hide();
     end
     UpdateGlobal();
+end
+
+function TargetCharmsInterface_Close()
 end
 
 function TargetCharmsPanel_Close()
