@@ -1,4 +1,4 @@
-TARGETCHARMS_VERSION = GetAddOnMetadata("TargetCharms", "Version");
+TARGETCHARMS_VERSION = C_AddOns.GetAddOnMetadata("TargetCharms", "Version");
 TARGETCHARMS_DB_VERSION = "1.6.4";
 
 local Defaults = {

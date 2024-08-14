@@ -1352,7 +1352,6 @@
 						CopySetup();
 					</OnClick>
 				</Scripts>
-				<NormalFont style="GameNormalFont" />
 			</Button>
 			<Frame name="OptionsFrameBackground" parentKey="" parentArray="" inherits="BackdropTemplate" frameStrata="BACKGROUND">
 				<Size x="497" y="574" />
