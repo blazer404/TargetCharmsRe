@@ -1,4 +1,4 @@
-## Interface: 100107
+## Interface: 120000
 ## X-Min-Interface: 50001
 ## Title: TargetCharms
 ## Notes: Toolbar for setting charms/raid icons on targets. Ctrl+Right-click in game for setup menu or type /tc setup
