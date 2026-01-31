@@ -87,7 +87,7 @@ end
 
 
 function TargetCharms_msg(text)
-    DEFAULT_CHAT_FRAME:AddMessage(TARGETCHARMS_MSG_TAG .. text);
+    DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00" .. TARGETCHARMS_MSG_TAG .. "|r" .. text);
 end
 
 function TargetCharms_Command(msg)
