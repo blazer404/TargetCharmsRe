@@ -435,7 +435,7 @@ end
 
 function MakeButton(frame, buttonNum, isMacro)
     local button = _G[frame .. "Charm" .. buttonNum];
-    local template = "CharmTemplate";
+    local template = "CharmTemplate, SecureCharmTemplate";
     if isMacro then
         template = "SecureCharmTemplate";
     end
@@ -532,6 +532,12 @@ function FormatButton(frame, buttonNum, posChar, typeNum, xSpacing, ySpacing)
             button = MakeButton(frame, buttonNum, false);
             button:Hide();
         end
+        -- bind button action as a macros
+        local charmId = buttonCharm[frame][buttonNum];
+        if charmId >= 0 then
+            button:SetAttribute("type", "macro")
+            button:SetAttribute("macrotext", "/tm " .. charmId);
+		end
     else
         if typeNum == TARGETCHARMS_DRAG then
             button = _G[frame .. "Charm" .. buttonNum];
@@ -687,26 +693,6 @@ function SetTexture(button, texture, textureID, o1, o2, o3, o4, a1, a2, w, h)
     texture:SetHeight(h);
     texture:SetTexture(texturePaths[textureID]);
     texture:SetTexCoord(o1, o2, o3, o4)
-end
-
-function SelectTarget(frame, targetId, btn, name)
-    local charmId = buttonCharm[frame][tonumber(targetId)];
-    if (frame == frameNames[1]) then
-        if (not TargetCharms_Options[frameNames[1]]["toggleicon"]) then
-            if (GetRaidTargetIndex("target") ~= charmId) then
-                SetRaidTarget("target", charmId)
-            end
-        else
-            SetRaidTargetIcon("target", charmId)
-        end
-    else
-        if charmId ~= 0 then
-            PlaceRaidMarker(charmId)
-        else
-            ClearRaidMarker()
-        end
-    end
-
 end
 
 function SetFrameScale(scale, id)

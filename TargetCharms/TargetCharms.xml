@@ -4,12 +4,6 @@
 		<Size><AbsDimension x="32" y="32"/></Size>
 		<Scripts>
 			<OnLoad></OnLoad>
-			<OnClick>
-								if ( button == "RightButton" and IsControlKeyDown()) then
-								else
-									SelectTarget(self:GetParent():GetName(),self:GetID(),button,self:GetParent():GetName());
-								end
-							</OnClick>
 							<OnMouseDown>
 								if ( button == "RightButton" and (TargetCharms_Options[self:GetParent():GetName()]["draggable"] or IsControlKeyDown())) then
 									if (IsControlKeyDown()) then
