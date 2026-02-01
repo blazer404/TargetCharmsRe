@@ -265,23 +265,30 @@ function IsInSetup()
 end
 
 function SetHideShow(frame)
-    local charmBar = _G[frame];
-    if (TargetCharms_Options[frameNames[1]]["showontarget"]) then
 
-        if (UnitExists("target")) then
-            if (not charmBar:IsShown()) then
-                charmBar:Show();
-            end
-        else
-            if (charmBar:IsShown()) then
-                charmBar:Hide();
-            end
-        end
-    else
-        if (not charmBar:IsShown()) then
-            charmBar:Show();
-        end
-    end
+    -- todo fixme 
+    -- Метод вызывает падение при попытке скрытия/показа фрейма "TopCharm" ( frameNames[2] )
+    -- Возможно другие фреймы также цепляет, но я не видел
+    -- Пока будет отключено. Возможно, я это исправлю позже.
+    -- Маркеры целей будут всегда на экране, но это лучше чем постоянные краши
+
+
+    --local charmBar = _G[frame];
+    --if (TargetCharms_Options[frameNames[1]]["showontarget"]) then
+    --    if (UnitExists("target")) then
+    --        if (not charmBar:IsShown()) then
+    --            charmBar:Show();
+    --        end
+    --    else
+    --        if (charmBar:IsShown()) then
+    --            charmBar:Hide();
+    --        end
+    --    end
+    --else
+    --    if (not charmBar:IsShown()) then
+    --        charmBar:Show();
+    --    end
+    --end
 end
 
 function SetTargetHideShow()
