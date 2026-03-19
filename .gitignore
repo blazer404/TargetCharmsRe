@@ -40,7 +40,9 @@ luac.out
 *.hex
 
 #IDE files
-.idea
-.vs
-TargetCharms/Logs
+.idea/
+.vs/
+.vscode/
+.kiro/
+TargetCharms/Logs/
 TargetCharms/.editorconfig
