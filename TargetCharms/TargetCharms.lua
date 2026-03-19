@@ -117,7 +117,6 @@ function TargetCharms_OnLoad(self)
     self:RegisterEvent("GROUP_ROSTER_UPDATE");
     self:RegisterEvent("PLAYER_TARGET_CHANGED");
     self:RegisterEvent("GROUP_ROSTER_UPDATE");
-    SetTargetHideShow();
     SLASH_TargetCharms1 = TARGETCHARMS_SLASH1;
     SLASH_TargetCharms2 = TARGETCHARMS_SLASH2;
     SlashCmdList["TargetCharms"] = TargetCharms_Command;
@@ -158,31 +157,8 @@ function CopyOldValues(t, f)
 end
 
 function CheckFrameViewState()
-
-    local charmBar = _G[frameNames[2]];
-
-    if IsInSetup() then
-        if (not charmBar:IsShown()) then
-            charmBar:Show();
-        end
-    else
-        if TargetCharms_Options["TargetCharms"]["enabled"] then
-            if not TargetCharms_Options["TargetCharms"]["partyOnly"] then
-                SetHideShow(frameNames[2]);
-            else
-                if (((GetNumGroupMembers() > 0) and not UnitInRaid("player")) or (UnitInRaid("player") and (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")))) then
-                    SetHideShow(frameNames[2]);
-                else
-                    if (charmBar:IsShown()) then
-                        charmBar:Hide();
-                    end
-                end
-            end
-        elseif (charmBar:IsShown()) then
-            charmBar:Hide();
-        end
-
-    end
+    -- TopCharm visibility is managed exclusively by RegisterAttributeDriver in SetHideShow.
+    -- It cannot be shown/hidden from event handlers (protected frame).
 end
 
 function CheckFlareFrameViewState()
@@ -265,34 +241,13 @@ function IsInSetup()
 end
 
 function SetHideShow(frame)
-
-    -- todo fixme 
-    -- Метод вызывает падение при попытке скрытия/показа фрейма "TopCharm" ( frameNames[2] )
-    -- Возможно другие фреймы также цепляет, но я не видел
-    -- Пока будет отключено. Возможно, я это исправлю позже.
-    -- Маркеры целей будут всегда на экране, но это лучше чем постоянные краши
-
-
-    --local charmBar = _G[frame];
-    --if (TargetCharms_Options[frameNames[1]]["showontarget"]) then
-    --    if (UnitExists("target")) then
-    --        if (not charmBar:IsShown()) then
-    --            charmBar:Show();
-    --        end
-    --    else
-    --        if (charmBar:IsShown()) then
-    --            charmBar:Hide();
-    --        end
-    --    end
-    --else
-    --    if (not charmBar:IsShown()) then
-    --        charmBar:Show();
-    --    end
-    --end
+    local condition = TargetCharms_Options[frameNames[1]]["showontarget"]
+        and "[@target,exists] show; hide" or "show";
+    RegisterAttributeDriver(_G[frameNames[2]], "state-visibility", condition);
 end
 
 function SetTargetHideShow()
-    RegisterUnitWatch(_G[frameNames[2]], true)
+    SetHideShow(frameNames[2]);
 end
 
 function TargetCharms_OnEvent(self, event)
@@ -348,6 +303,7 @@ function SetupTargetCharms()
     SetupButtons(frameNames[1], frameNames[1]);
     SetupButtons(frameNames[5], frameNames[5]);
     SetUpReadyButton();
+    SetTargetHideShow();
 end
 
 function TargetCharms_Reset()

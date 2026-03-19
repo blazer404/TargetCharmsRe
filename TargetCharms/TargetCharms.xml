@@ -12,7 +12,7 @@
 										self:GetParent():GetParent():StartMoving();
 									end
 								else
-									PlaySound(624);
+									PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 								end
 							</OnMouseDown>
 							<OnMouseUp>
