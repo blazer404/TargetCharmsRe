@@ -615,7 +615,7 @@ function FormatButton(frame, buttonNum, posChar, typeNum, xSpacing, ySpacing)
             MakeCharm(frame, button, buttonNum, 0, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
             SetTexture(button, _G[button:GetName() .. "TextureIcon"], 3, 0, 1, 0, 1, 3, -2, 26, 26);
             _G[button:GetName() .. "TextureColor"]:SetTexture();
-            button:SetAttribute("macrotext", "/cwm 0");
+            button:SetAttribute("macrotext", "/cwm 1\n/cwm 2\n/cwm 3\n/cwm 4\n/cwm 5\n/cwm 6\n/cwm 7\n/cwm 8");
             button:Show();
         else
             button = MakeButton(frame, buttonNum, true);
