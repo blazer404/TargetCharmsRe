@@ -156,77 +156,36 @@ function CopyOldValues(t, f)
     return temp;
 end
 
+function ShouldShow(frameKey)
+    if IsInSetup() then return true end
+    if not TargetCharms_Options[frameKey]["enabled"] then return false end
+    if not TargetCharms_Options[frameKey]["partyOnly"] then return true end
+    return ((GetNumGroupMembers() > 0) and not UnitInRaid("player"))
+        or (UnitInRaid("player") and (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")))
+end
+
 function CheckFrameViewState()
-    -- TopCharm visibility is managed exclusively by RegisterAttributeDriver in SetHideShow.
-    -- It cannot be shown/hidden from event handlers (protected frame).
+    if InCombatLockdown() then return end
+    local bar = _G[frameNames[1]]
+    if ShouldShow(frameNames[1]) then bar:Show() else bar:Hide() end
 end
 
 function CheckFlareFrameViewState()
-    if (not InCombatLockdown()) then
-        local charmBar = _G[frameNames[6]];
-
-        if IsInSetup() then
-            if (not charmBar:IsShown()) then
-                charmBar:Show();
-            end
-        else
-            if TargetCharms_Options[frameNames[5]]["enabled"] then
-
-                if not TargetCharms_Options[frameNames[5]]["partyOnly"] then
-                    if (not charmBar:IsShown()) then
-                        charmBar:Show();
-                    end
-                else
-                    if (((GetNumGroupMembers() > 0) and not UnitInRaid("player")) or (UnitInRaid("player") and (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")))) then
-                        if (not charmBar:IsShown()) then
-                            charmBar:Show();
-                        end
-                    else
-                        if (charmBar:IsShown()) then
-                            charmBar:Hide();
-                        end
-                    end
-                end
-            elseif (charmBar:IsShown()) then
-                charmBar:Hide();
-            end
-        end
-    else
-        _G[frameNames[1]]:RegisterEvent("PLAYER_REGEN_ENABLED");
-    end
+    if InCombatLockdown() then return end
+    local bar = _G[frameNames[6]]
+    if ShouldShow(frameNames[5]) then bar:Show() else bar:Hide() end
 end
 
 function CheckReadyButtonViewState()
-    charmBar = _G[frameNames[4]];
-    charmBar:Show();
-    charmBar = _G[frameNames[3]];
-    charmBar:Show();
-
-    if IsInSetup() then
-        if (not charmBar:IsShown()) then
-            charmBar:Show();
-        end
+    if InCombatLockdown() then return end
+    local charmBar = _G[frameNames[3]]
+    local topReady = _G[frameNames[4]]
+    if ShouldShow(frameNames[3]) then
+        charmBar:Show()
+        topReady:Show()
     else
-        if TargetCharms_Options[frameNames[3]]["enabled"] then
-            if not TargetCharms_Options[frameNames[3]]["partyOnly"] then
-                if (not charmBar:IsShown()) then
-                    charmBar:Show();
-                end
-            else
-                if (((GetNumGroupMembers() > 0 or UnitInRaid("player")) and (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")))) then
-                    if (not charmBar:IsShown()) then
-                        charmBar:Show();
-                    end
-                else
-                    if (charmBar:IsShown()) then
-                        charmBar:Hide();
-                    end
-                end
-            end
-        elseif (charmBar:IsShown()) then
-            charmBar:Hide();
-        end
-
+        charmBar:Hide()
+        topReady:Hide()
     end
 end
 
@@ -307,41 +266,18 @@ function SetupTargetCharms()
 end
 
 function TargetCharms_Reset()
-    TargetCharms_Options = CopyValues(CloneTable(Defaults), Defaults);
+    TargetCharms_Options = CloneTable(Defaults);
+    TargetCharms_Options["Version"] = TARGETCHARMS_DB_VERSION;
     TargetCharms_Options["Name"] = UnitName("player");
-    local tmpFrame = _G[frameNames[1]];
-    tmpFrame:SetScale(TargetCharms_Options[frameNames[1]]["barscale"]);
-    tmpFrame:SetPoint("TOPLEFT", 0, 0);
-    tmpFrame = _G[frameNames[2]];
-    tmpFrame:ClearAllPoints()
-    tmpFrame:SetPoint("TOPLEFT", _G["UIParent"], "TOP", 0, -20);
-    tmpFrame:SetAlpha(TargetCharms_Options[frameNames[1]]["alphaVal"]);
-    tmpFrame = _G[frameNames[4]];
-    tmpFrame:SetAlpha(1);
-    tmpFrame:SetScale(1);
-    tmpFrame:ClearAllPoints();
-    tmpFrame:SetPoint("TOPLEFT", _G["UIParent"], "TOP", 0, 0);
-    tmpFrame = _G[frameNames[3]];
-    tmpFrame:SetAlpha(TargetCharms_Options[frameNames[3]]["alphaVal"]);
-    tmpFrame:SetScale(1);
-    tmpFrame:ClearAllPoints();
-    tmpFrame:SetPoint("TOPLEFT", 0, 0);
-    tmpFrame:SetWidth(TargetCharms_Options[frameNames[3]]["width"]);
-    tmpFrame = _G[frameNames[4]];
-    tmpFrame:SetWidth(TargetCharms_Options[frameNames[3]]["width"]);
-    tmpFrame = _G[frameNames[5]];
-    tmpFrame:SetScale(TargetCharms_Options[frameNames[5]]["barscale"]);
-    tmpFrame:SetPoint("TOPLEFT", 0, 0);
-    tmpFrame = _G[frameNames[6]];
-    tmpFrame:ClearAllPoints()
-    tmpFrame:SetPoint("TOPLEFT", _G["UIParent"], "TOP", 100, 0);
-    tmpFrame:SetAlpha(TargetCharms_Options[frameNames[5]]["alphaVal"]);
-    tmpFrame = _G[frameNames[7]];
-    if (tmpFrame ~= nil) then
-        tmpFrame:ClearAllPoints();
-        tmpFrame:SetPoint("CENTER", offset, 0);
-    end
+    SetupTargetCharms();
+    CheckFrameViewState();
+    CheckReadyButtonViewState();
+    CheckFlareFrameViewState();
     UpdateGlobal();
+    if IsInSetup() then
+        HideSetup();
+        ShowSetup();
+    end
 end
 
 function SetupFrames()

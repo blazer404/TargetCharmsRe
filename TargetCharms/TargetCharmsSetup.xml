@@ -436,6 +436,7 @@
 					</OnShow>
 					<OnClick>
 						TargetCharms_Options["TargetCharms"]["enabled"] = EnabledButton:GetChecked();
+						CheckFrameViewState();
 					</OnClick>
 				</Scripts>
 			</CheckButton>
@@ -456,6 +457,7 @@
 					</OnShow>
 					<OnClick>
 						TargetCharms_Options["TargetCharms"]["partyOnly"] = PartyToggleButton:GetChecked();
+						CheckFrameViewState();
 					</OnClick>
 				</Scripts>
 			</CheckButton>
@@ -806,6 +808,7 @@
 					</OnShow>
 					<OnClick>
 						TargetCharms_Options["FlareCharms"]["enabled"] = FlareEnabledButton:GetChecked();
+						CheckFlareFrameViewState();
 					</OnClick>
 				</Scripts>
 			</CheckButton>
@@ -826,6 +829,7 @@
 					</OnShow>
 					<OnClick>
 						TargetCharms_Options["FlareCharms"]["partyOnly"] = FlarePartyToggleButton:GetChecked();
+						CheckFlareFrameViewState();
 					</OnClick>
 				</Scripts>
 			</CheckButton>
@@ -1151,6 +1155,7 @@
 					</OnShow>
 					<OnClick>
 						TargetCharms_Options["ReadyCharm"]["enabled"] = EnabledButton2:GetChecked();
+						CheckReadyButtonViewState();
 					</OnClick>
 				</Scripts>
 			</CheckButton>
@@ -1171,6 +1176,7 @@
 					</OnShow>
 					<OnClick>
 						TargetCharms_Options["ReadyCharm"]["partyOnly"] = PartyToggleButton2:GetChecked();
+						CheckReadyButtonViewState();
 					</OnClick>
 				</Scripts>
 			</CheckButton>
