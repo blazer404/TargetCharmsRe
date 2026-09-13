@@ -497,7 +497,7 @@ function FormatButton(frame, buttonNum, posChar, typeNum, xSpacing, ySpacing)
         end
         -- bind button action as a macros
         local charmId = buttonCharm[frame][buttonNum];
-        if charmId >= 0 then
+        if charmId and charmId >= 0 then
             button:SetAttribute("type", "macro")
             button:SetAttribute("macrotext", "/tm " .. charmId);
 		end
