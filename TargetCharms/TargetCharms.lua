@@ -357,10 +357,20 @@ end
 function AutoSizeReadyButton()
     local button = _G[frameNames[3]]
     local parent = _G[frameNames[4]]
-    local textWidth = button:GetTextWidth() or 0
-    local width = math.ceil(textWidth) + 20
+    local fs = button:GetFontString()
+    if not fs then return end
+    local textWidth = fs:GetStringWidth() or 0
+    local textHeight = fs:GetStringHeight() or 12
+    if textWidth == 0 then return end
+    local padX, padY = 12, 8
+    local width = math.ceil(textWidth) + padX * 2
+    local height = math.ceil(textHeight) + padY * 2
     button:SetWidth(width)
+    button:SetHeight(height)
     parent:SetWidth(width)
+    parent:SetHeight(height)
+    fs:ClearAllPoints()
+    fs:SetPoint("CENTER", button, "CENTER", 0, -1)
 end
 
 function SetUpReadyButton()
@@ -376,7 +386,7 @@ function SetUpReadyButton()
     tmpFrame:SetScale(TargetCharms_Options[frameNames[3]]["barscale"]);
     tmpFrame = _G[frameNames[3]];
     tmpFrame:SetText(TargetCharms_Options[frameNames[3]]["text"]);
-    AutoSizeReadyButton();
+    C_Timer.After(0, AutoSizeReadyButton);
 end
 
 function UpdateLocation(frameId, x, y)
