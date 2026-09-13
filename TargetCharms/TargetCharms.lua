@@ -354,6 +354,15 @@ function SetupFrames()
     tmpFrame:SetAlpha(TargetCharms_Options[frameNames[5]]["alphaVal"]);
 end
 
+function AutoSizeReadyButton()
+    local button = _G[frameNames[3]]
+    local parent = _G[frameNames[4]]
+    local textWidth = button:GetTextWidth() or 0
+    local width = math.ceil(textWidth) + 20
+    button:SetWidth(width)
+    parent:SetWidth(width)
+end
+
 function SetUpReadyButton()
     local tmpFrame = _G[frameNames[4]];
     if (TargetCharms_Options[frameNames[3]]["X"] ~= nil) then
@@ -365,10 +374,9 @@ function SetUpReadyButton()
     end
     tmpFrame:SetAlpha(TargetCharms_Options[frameNames[3]]["alphaVal"]);
     tmpFrame:SetScale(TargetCharms_Options[frameNames[3]]["barscale"]);
-    tmpFrame:SetWidth(TargetCharms_Options[frameNames[3]]["width"]);
     tmpFrame = _G[frameNames[3]];
-    tmpFrame:SetWidth(TargetCharms_Options[frameNames[3]]["width"]);
     tmpFrame:SetText(TargetCharms_Options[frameNames[3]]["text"]);
+    AutoSizeReadyButton();
 end
 
 function UpdateLocation(frameId, x, y)

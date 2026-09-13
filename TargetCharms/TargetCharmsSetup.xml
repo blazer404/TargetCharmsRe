@@ -1102,6 +1102,7 @@
 					<OnTextChanged>
 						TargetCharms_Options["ReadyCharm"]["text"] = EditBox2:GetText();
 						ReadyCharm:SetText(TargetCharms_Options["ReadyCharm"]["text"]);
+						AutoSizeReadyButton();
 					</OnTextChanged>
 					<OnEscapePressed>
 						HideSetup();
@@ -1305,14 +1306,12 @@
 						WidthSlider2:SetValueStep(1);
 					</OnLoad>
 					<OnShow>
-						WidthSlider2:SetValue(TargetCharms_Options["ReadyCharm"]["width"]);
-						_G[self:GetName().."ValueText"]:SetText(WidthSlider2:GetValue());
+						local tw = ReadyCharm:GetTextWidth() or 0
+						WidthSlider2:SetValue(tw + 16);
+						_G[self:GetName().."ValueText"]:SetText(tw + 16);
 					</OnShow>
 					<OnValueChanged>
-						TargetCharms_Options["ReadyCharm"]["width"] = WidthSlider2:GetValue();
-						TopReady:SetWidth(TargetCharms_Options["ReadyCharm"]["width"]);
-						ReadyCharm:SetWidth(TargetCharms_Options["ReadyCharm"]["width"]);
-						_G[self:GetName().."ValueText"]:SetText(WidthSlider2:GetValue());
+						_G[self:GetName().."ValueText"]:SetText(ReadyCharm:GetTextWidth() + 16);
 					</OnValueChanged>
 				</Scripts>
 			</Slider>

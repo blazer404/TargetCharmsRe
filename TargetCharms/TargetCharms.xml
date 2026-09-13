@@ -115,18 +115,21 @@
 			</Frames>
 	</Frame>
 	<Frame name="TopReady" id="3" parent="UIParent">
-		<Size><AbsDimension x="50" y="20"/></Size>
+		<Size><AbsDimension x="60" y="22"/></Size>
 		<Anchors><Anchor point="TOPLEFT" relativePoint="TOP"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>			
 			<Frames>	
 					<Button name="ReadyCharm" inherits="UIPanelButtonTemplate">						
 						<Size>
-							<AbsDimension x="50" y="20"/>
+							<AbsDimension x="60" y="22"/>
 						</Size>
 						<Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
 						<Scripts>
 							<OnLoad>
 								self:GetParent():SetMovable(true);
 							</OnLoad>
+							<OnShow>
+								AutoSizeReadyButton();
+							</OnShow>
 							<OnClick>
 								if button == "RightButton" then
 								else
