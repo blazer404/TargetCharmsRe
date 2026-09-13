@@ -433,9 +433,11 @@
 					</OnLoad>
 					<OnShow>
 						EnabledButton:SetChecked(TargetCharms_Options["TargetCharms"]["enabled"]);
+						SetTargetCharmsSectionEnabled(TargetCharms_Options["TargetCharms"]["enabled"]);
 					</OnShow>
 					<OnClick>
 						TargetCharms_Options["TargetCharms"]["enabled"] = EnabledButton:GetChecked();
+						SetTargetCharmsSectionEnabled(EnabledButton:GetChecked());
 						CheckFrameViewState();
 					</OnClick>
 				</Scripts>
@@ -805,9 +807,11 @@
 					</OnLoad>
 					<OnShow>
 						FlareEnabledButton:SetChecked(TargetCharms_Options["FlareCharms"]["enabled"]);
+						SetFlareSectionEnabled(TargetCharms_Options["FlareCharms"]["enabled"]);
 					</OnShow>
 					<OnClick>
 						TargetCharms_Options["FlareCharms"]["enabled"] = FlareEnabledButton:GetChecked();
+						SetFlareSectionEnabled(FlareEnabledButton:GetChecked());
 						CheckFlareFrameViewState();
 					</OnClick>
 				</Scripts>
@@ -1152,9 +1156,11 @@
 					</OnLoad>
 					<OnShow>
 						EnabledButton2:SetChecked(TargetCharms_Options["ReadyCharm"]["enabled"]);
+						SetReadySectionEnabled(TargetCharms_Options["ReadyCharm"]["enabled"]);
 					</OnShow>
 					<OnClick>
 						TargetCharms_Options["ReadyCharm"]["enabled"] = EnabledButton2:GetChecked();
+						SetReadySectionEnabled(EnabledButton2:GetChecked());
 						CheckReadyButtonViewState();
 					</OnClick>
 				</Scripts>

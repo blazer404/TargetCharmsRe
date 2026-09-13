@@ -164,6 +164,55 @@ function ShouldShow(frameKey)
         or (UnitInRaid("player") and (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")))
 end
 
+function SetControlEnabled(control, enabled)
+    if not control then return end
+    if enabled then
+        if control.Enable then control:Enable() end
+        control:SetAlpha(1)
+    else
+        if control.Disable then control:Disable() end
+        control:SetAlpha(0.5)
+    end
+end
+
+function SetTargetCharmsSectionEnabled(enabled)
+    SetControlEnabled(DraggableToggleButton, enabled)
+    SetControlEnabled(PartyToggleButton, enabled)
+    SetControlEnabled(TargetToggleButton, enabled)
+    SetControlEnabled(IconToggleButton, enabled)
+    SetControlEnabled(EditBox, enabled)
+    SetControlEnabled(ScaleSlider, enabled)
+    SetControlEnabled(AlphaSlider, enabled)
+    SetControlEnabled(XSlider, enabled)
+    SetControlEnabled(YSlider, enabled)
+    for i = 1, #TargetCharms_LayoutDefaults do
+        SetControlEnabled(_G["ButtonPresetOptions" .. i], enabled)
+    end
+end
+
+function SetReadySectionEnabled(enabled)
+    SetControlEnabled(DraggableToggleButton2, enabled)
+    SetControlEnabled(PartyToggleButton2, enabled)
+    SetControlEnabled(EditBox2, enabled)
+    SetControlEnabled(ScaleSlider2, enabled)
+    SetControlEnabled(AlphaSlider2, enabled)
+    SetControlEnabled(WidthSlider2, enabled)
+end
+
+function SetFlareSectionEnabled(enabled)
+    SetControlEnabled(FlareDraggableToggleButton, enabled)
+    SetControlEnabled(FlarePartyToggleButton, enabled)
+    SetControlEnabled(FlareShowIconsToggleButton, enabled)
+    SetControlEnabled(FlareEditBox, enabled)
+    SetControlEnabled(FlareScaleSlider, enabled)
+    SetControlEnabled(FlareAlphaSlider, enabled)
+    SetControlEnabled(FlareXSlider, enabled)
+    SetControlEnabled(FlareYSlider, enabled)
+    for i = 1, #Flare_LayoutDefaults do
+        SetControlEnabled(_G["ButtonFlarePresetOptions" .. i], enabled)
+    end
+end
+
 function CheckFrameViewState()
     if InCombatLockdown() then return end
     local bar = _G[frameNames[1]]
