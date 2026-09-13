@@ -96,7 +96,6 @@ function TargetCharms_Command(msg)
     a, b, cmd, arg = string.find(msg, "(%S+)%s*(%S*)")
     if cmd == TargetCharms_CMDS[1] then
         TargetCharms_Reset();
-        TargetCharms_msg(TARGETCHARMS_OPTIONS_RESET);
     elseif cmd == TargetCharms_CMDS[2] then
         ShowSetup();
     else
@@ -323,6 +322,7 @@ function TargetCharms_Reset()
     CheckReadyButtonViewState();
     CheckFlareFrameViewState();
     UpdateGlobal();
+    TargetCharms_msg(TARGETCHARMS_OPTIONS_RESET);
     if IsInSetup() then
         HideSetup();
         ShowSetup();
