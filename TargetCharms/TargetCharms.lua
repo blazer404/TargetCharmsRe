@@ -157,8 +157,8 @@ function CopyOldValues(t, f)
 end
 
 function ShouldShow(frameKey)
-    if IsInSetup() then return true end
     if not TargetCharms_Options[frameKey]["enabled"] then return false end
+    if IsInSetup() then return true end
     if not TargetCharms_Options[frameKey]["partyOnly"] then return true end
     return ((GetNumGroupMembers() > 0) and not UnitInRaid("player"))
         or (UnitInRaid("player") and (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")))
