@@ -744,7 +744,7 @@
 						FlareEditBox:SetText(TargetCharms_Options["FlareCharms"]["buttonTemplate"]);
 					</OnShow>
 					<OnTextChanged>
-						if InCombatLockdown()~=1 then
+						if not InCombatLockdown() then
 							TargetCharms_Options["FlareCharms"]["buttonTemplate"] = FlareEditBox:GetText();
 							SetupButtons("FlareCharms","FlareCharms");
 						else
