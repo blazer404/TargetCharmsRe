@@ -367,17 +367,11 @@ function TargetCharms_InitSettings()
 			end
 		end))
 
+	local sourceProfileName = TargetCharms_OptionsGlobal["Name"]
 	local copyInitializer = CreateSettingsButtonInitializer(
-		TARGETCHARMS_OPTIONS_COPY_BUTTON,
-		function()
-			local source = TargetCharms_OptionsGlobal["Name"]
-			if source and source ~= UnitName("player") then
-				return TARGETCHARMS_OPTIONS_COPY_BUTTON .. source
-			end
-			return TARGETCHARMS_OPTIONS_COPY_BUTTON
-		end,
-		function() CopySetup() end, nil, false)
-	copyInitializer:AddSearchTags(TARGETCHARMS_OPTIONS_COPY_BUTTON)
+		sourceProfileName and (TARGETCHARMS_OPTIONS_SOURCE .. " " .. sourceProfileName) or TARGETCHARMS_OPTIONS_SOURCE,
+		TARGETCHARMS_OPTIONS_COPY_SETTINGS,
+		function() CopySetup() end, nil, true)
 	copyInitializer:AddShownPredicate(function()
 		local source = TargetCharms_OptionsGlobal["Name"]
 		return source ~= nil and source ~= UnitName("player")
