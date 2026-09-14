@@ -189,6 +189,8 @@ function TargetCharms_OnEvent(self, event)
             TargetCharms_Options["Version"] = TARGETCHARMS_DB_VERSION;
         end
 
+        NormalizeOptionValues();
+
         SetupTargetCharms();
 
         TargetCharms_InitSettings();
@@ -213,6 +215,21 @@ function SetupTargetCharms()
     SetupButtons(frameNames[5], frameNames[5]);
     SetUpReadyButton();
     SetTargetHideShow();
+end
+
+function NormalizeOptionValues()
+    for _, block in ipairs({ frameNames[1], frameNames[3], frameNames[5] }) do
+        local alpha = TargetCharms_Options[block]["alphaVal"] or 0
+        if alpha < 0.1 then
+            TargetCharms_Options[block]["alphaVal"] = 0.1
+        elseif alpha > 1.0 then
+            TargetCharms_Options[block]["alphaVal"] = 1.0
+        end
+        local scale = TargetCharms_Options[block]["barscale"] or 1.0
+        scale = math.max(0.2, math.min(2.0, scale))
+        scale = math.floor((scale - 0.2) / 0.1 + 0.5) * 0.1 + 0.2
+        TargetCharms_Options[block]["barscale"] = tonumber(string.format("%.1f", scale))
+    end
 end
 
 function TargetCharms_Reset()
@@ -282,8 +299,8 @@ function SetUpReadyButton()
         _G[frameNames[4]]:SetPoint("TOPLEFT", _G["UIParent"], "TOP", 0, 0);
     end
     tmpFrame:SetAlpha(TargetCharms_Options[frameNames[3]]["alphaVal"]);
-    tmpFrame:SetScale(TargetCharms_Options[frameNames[3]]["barscale"]);
     tmpFrame = _G[frameNames[3]];
+    tmpFrame:SetScale(TargetCharms_Options[frameNames[3]]["barscale"]);
     tmpFrame:SetText(TargetCharms_Options[frameNames[3]]["text"]);
     C_Timer.After(0, AutoSizeReadyButton);
 end
