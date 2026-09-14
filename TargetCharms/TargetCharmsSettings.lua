@@ -63,6 +63,22 @@ function TargetCharmsEditBoxControlMixin:Release()
 	SettingsControlMixin.Release(self);
 end
 
+local settingsRefreshVariables = {
+	"TC_ENABLED", "TC_DRAG", "TC_PARTY", "TC_SHOWTARGET", "TC_TOGGLE", "TC_SCALE", "TC_OPACITY", "TC_XSPACING", "TC_YSPACING", "TC_TEMPLATE", "TC_PRESET",
+	"RC_ENABLED", "RC_DRAG", "RC_PARTY", "RC_SCALE", "RC_OPACITY", "RC_TEXT",
+	"FL_ENABLED", "FL_DRAG", "FL_PARTY", "FL_ICONS", "FL_SCALE", "FL_OPACITY", "FL_XSPACING", "FL_YSPACING", "FL_TEMPLATE", "FL_PRESET",
+	"PROFILE_MAIN",
+};
+
+function TargetCharms_SettingsRefresh()
+	if type(Settings.GetSetting) ~= "function" or not TargetCharms_SettingsCategoryID then
+		return;
+	end
+	for index = 1, #settingsRefreshVariables do
+		Settings.NotifyUpdate(settingsRefreshVariables[index]);
+	end
+end
+
 function TargetCharms_InitSettings()
 	local category, layout = Settings.RegisterVerticalLayoutCategory(addonName)
 

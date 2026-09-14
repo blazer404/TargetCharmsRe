@@ -224,6 +224,7 @@ function TargetCharms_Reset()
     CheckReadyButtonViewState();
     CheckFlareFrameViewState();
     UpdateGlobal();
+    TargetCharms_SettingsRefresh();
     TargetCharms_msg(TARGETCHARMS_OPTIONS_RESET);
 end
 
