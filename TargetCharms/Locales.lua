@@ -29,6 +29,7 @@ if G_LOCALE == "ruRU" then
     TARGETCHARMS_OPTIONS_PROFILE = "Профиль";
     TARGETCHARMS_PANEL_SHOW = "Показать настройки";
     TARGETCHARMS_PANEL_RESET = "Сбросить аддон";
+    TARGETCHARMS_OPTIONS_RESET_TITLE = "Сброс";
     TARGETCHARMS_READYCHECK_TEXT = "Готовы?";
     TARGETCHARMS_MSG_TAG = "TargetCharms: ";
     TARGETCHARMS_CMD_HELP = "/TargetCharms [Reset|Setup]";
@@ -70,7 +71,7 @@ if G_LOCALE == "ruRU" then
 
     TargetCharms_LayoutDefaults = {
         { "Стандартный", ">1>5v6<2v3>7v8<4v_>0" },
-        { "Инвертированный", ">4>8v7<3v2>6v5<1v_>0" },
+        { "Классический", ">4>8v7<3v2>6v5<1v_>0" },
         { "Горизонтальный", ">1>2>3>4>5>6>7>8>0" },
         { "Вертикальный", ">1v2v3v4v5v6v7v8v0" },
         { "3x3", ">1v2v3>6^5^4>7v8v0" }
@@ -78,10 +79,10 @@ if G_LOCALE == "ruRU" then
 
     Flare_LayoutDefaults = {
         { "Стандартный", ">D>XVW<RvB>SvP<GvO>Y" },
-        { "3x3", ">D>R>W>SvB<G<PvO>Y>X" },
+        { "Классический", ">DVY>SVB<OVP>RVW<GV_>X" },
         { "Горизонтальный", ">D>R>W>S>B>G>P>O>Y>X" },
         { "Вертикальный", ">DvRvWvSvBvGvPvOvYvX" },
-        { "Классический", ">DVY>SVB<OVP>RVW<GV_>X" }
+        { "3x3", ">D>R>W>SvB<G<PvO>Y>X" }
     };
 else
     TARGETCHARMS_TITLE = "TargetCharms";
@@ -112,6 +113,7 @@ else
     TARGETCHARMS_OPTIONS_PROFILE = "Profile";
     TARGETCHARMS_PANEL_SHOW = "Show Setup";
     TARGETCHARMS_PANEL_RESET = "Reset Addon";
+    TARGETCHARMS_OPTIONS_RESET_TITLE = "Reset";
     TARGETCHARMS_OPTIONS_RESET = "Position and Values Reset";
 
     TARGETCHARMS_READYCHECK_TEXT = "Ready?";
@@ -154,7 +156,7 @@ else
 
     TargetCharms_LayoutDefaults = {
         { "Standard", ">1>5v6<2v3>7v8<4v_>0" },
-        { "Inverted", ">4>8v7<3v2>6v5<1v_>0" },
+        { "Classic", ">4>8v7<3v2>6v5<1v_>0" },
         { "Horizontal", ">1>2>3>4>5>6>7>8>0" },
         { "Vertical", ">1v2v3v4v5v6v7v8v0" },
         { "3x3", ">1v2v3>6^5^4>7v8v0" }
@@ -162,9 +164,9 @@ else
 
     Flare_LayoutDefaults = {
         { "Standard", ">D>XVW<RvB>SvP<GvO>Y" },
-        { "3x3", ">D>R>W>SvB<G<PvO>Y>X" },
+        { "Classic", ">DVY>SVB<OVP>RVW<GV_>X" },
         { "Horizontal", ">D>R>W>S>B>G>P>O>Y>X" },
         { "Vertical", ">DvRvWvSvBvGvPvOvYvX" },
-        { "Classic", ">DVY>SVB<OVP>RVW<GV_>X" }
+        { "3x3", ">D>R>W>SvB<G<PvO>Y>X" }
     };
 end
