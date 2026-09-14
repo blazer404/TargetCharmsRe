@@ -92,6 +92,10 @@ local function CreateEnableGate(setting)
 	return Settings.CreateControlInitializer("SettingsCheckboxControlTemplate", setting)
 end
 
+local CUSTOM_LAYOUT = "CUSTOM"
+
+local customLayoutMode = {}
+
 local settingsRefreshVariables = {
 	"TC_ENABLED", "TC_DRAG", "TC_PARTY", "TC_SHOWTARGET", "TC_TOGGLE", "TC_SCALE", "TC_OPACITY", "TC_XSPACING", "TC_YSPACING", "TC_TEMPLATE", "TC_PRESET",
 	"RC_ENABLED", "RC_DRAG", "RC_PARTY", "RC_SCALE", "RC_OPACITY", "RC_TEXT",
@@ -202,17 +206,22 @@ function TargetCharms_InitSettings()
 
 	do
 		local s = Settings.RegisterProxySetting(category, "TC_PRESET", Settings.VarType.String, TARGETCHARMS_OPTIONS_PRESETS_TITLE, Defaults["TargetCharms"]["buttonTemplate"],
-			function() return TargetCharms_Options["TargetCharms"]["buttonTemplate"] end,
+			function() return customLayoutMode["TargetCharms"] and CUSTOM_LAYOUT or TargetCharms_Options["TargetCharms"]["buttonTemplate"] end,
 			function(v)
-				TargetCharms_Options["TargetCharms"]["buttonTemplate"] = v
-				SetupButtons("TargetCharms", "TargetCharms")
-				Settings.NotifyUpdate("TC_TEMPLATE")
+				if v == CUSTOM_LAYOUT then
+					customLayoutMode["TargetCharms"] = true
+				else
+					customLayoutMode["TargetCharms"] = false
+					TargetCharms_Options["TargetCharms"]["buttonTemplate"] = v
+					SetupButtons("TargetCharms", "TargetCharms")
+				end
 			end)
 		local function GetPresetOptions()
 			local container = Settings.CreateControlTextContainer()
 			for _, v in ipairs(TargetCharms_LayoutDefaults) do
 				container:Add(v[2], v[1])
 			end
+			container:Add(CUSTOM_LAYOUT, TARGETCHARMS_OPTIONS_CUSTOM_LAYOUT)
 			return container:GetData()
 		end
 		local init = Settings.CreateDropdown(category, s, GetPresetOptions)
@@ -225,10 +234,10 @@ function TargetCharms_InitSettings()
 			function(v)
 				TargetCharms_Options["TargetCharms"]["buttonTemplate"] = v
 				SetupButtons("TargetCharms", "TargetCharms")
-				Settings.NotifyUpdate("TC_PRESET")
 			end)
 		local init = Settings.CreateControlInitializer("TargetCharmsEditBoxControlTemplate", s)
 		init:SetParentInitializer(tcParent, function() return tcEnabledSetting:GetValue() end)
+		init:AddShownPredicate(function() return customLayoutMode["TargetCharms"] end)
 		layout:AddInitializer(init)
 	end
 
@@ -314,17 +323,22 @@ function TargetCharms_InitSettings()
 
 	do
 		local s = Settings.RegisterProxySetting(category, "FL_PRESET", Settings.VarType.String, TARGETCHARMS_OPTIONS_PRESETS_TITLE, Defaults["FlareCharms"]["buttonTemplate"],
-			function() return TargetCharms_Options["FlareCharms"]["buttonTemplate"] end,
+			function() return customLayoutMode["FlareCharms"] and CUSTOM_LAYOUT or TargetCharms_Options["FlareCharms"]["buttonTemplate"] end,
 			function(v)
-				TargetCharms_Options["FlareCharms"]["buttonTemplate"] = v
-				SetupButtons("FlareCharms", "FlareCharms")
-				Settings.NotifyUpdate("FL_TEMPLATE")
+				if v == CUSTOM_LAYOUT then
+					customLayoutMode["FlareCharms"] = true
+				else
+					customLayoutMode["FlareCharms"] = false
+					TargetCharms_Options["FlareCharms"]["buttonTemplate"] = v
+					SetupButtons("FlareCharms", "FlareCharms")
+				end
 			end)
 		local function GetPresetOptions()
 			local container = Settings.CreateControlTextContainer()
 			for _, v in ipairs(Flare_LayoutDefaults) do
 				container:Add(v[2], v[1])
 			end
+			container:Add(CUSTOM_LAYOUT, TARGETCHARMS_OPTIONS_CUSTOM_LAYOUT)
 			return container:GetData()
 		end
 		local init = Settings.CreateDropdown(category, s, GetPresetOptions)
@@ -337,10 +351,10 @@ function TargetCharms_InitSettings()
 			function(v)
 				TargetCharms_Options["FlareCharms"]["buttonTemplate"] = v
 				SetupButtons("FlareCharms", "FlareCharms")
-				Settings.NotifyUpdate("FL_PRESET")
 			end)
 		local init = Settings.CreateControlInitializer("TargetCharmsEditBoxControlTemplate", s)
 		init:SetParentInitializer(flParent, function() return flEnabledSetting:GetValue() end)
+		init:AddShownPredicate(function() return customLayoutMode["FlareCharms"] end)
 		layout:AddInitializer(init)
 	end
 

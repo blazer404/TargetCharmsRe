@@ -361,7 +361,7 @@ function SetupButtons(frameInfo, frameTarget)
     end
 
     for t = buttonNum, 20 do
-        local button = _G[frameTarget .. "Charm" .. buttonNum];
+        local button = _G[frameTarget .. "Charm" .. t];
         if button ~= nil then
             button:Hide();
         end
