@@ -182,4 +182,11 @@
 			</Frames>
 		
 	</Frame>
+
+	<Frame name="TargetCharmsEditBoxControlTemplate" inherits="SettingsListElementTemplate" mixin="TargetCharmsEditBoxControlMixin" virtual="true">
+		<Size x="280" y="26"/>
+		<Scripts>
+			<OnLoad method="OnLoad"/>
+		</Scripts>
+	</Frame>
 </Ui>

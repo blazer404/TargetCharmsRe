@@ -1,7 +1,7 @@
 TARGETCHARMS_VERSION = C_AddOns.GetAddOnMetadata("TargetCharms", "Version");
 TARGETCHARMS_DB_VERSION = "1.6.4";
 
-local Defaults = {
+Defaults = {
     ["TargetCharms"] = {
         ["X"] = nil,
         ["Y"] = nil,
@@ -49,7 +49,6 @@ local frameNames = {
     "TopReady",
     "FlareCharms",
     "TopFlare",
-    "TargetCharmsSetup",
 };
 local buttonCharm = {
     ["TargetCharms"] = {},
@@ -61,29 +60,6 @@ local texturePaths = {
     "interface\\buttons\\UI-GroupLoot-Pass-Up.blp",
     "interface\\icons\\ability_hunter_snipershot.blp"
 };
-
---this is a copy of deleted deprecated function
-local InterfaceOptions_AddCategory = InterfaceOptions_AddCategory
-if not InterfaceOptions_AddCategory then
-	function InterfaceOptions_AddCategory(frame, addOn, position)
-		-- cancel is no longer a default option. May add menu extension for this.
-		frame.OnCommit = frame.okay;
-		frame.OnDefault = frame.default;
-		frame.OnRefresh = frame.refresh;
-
-		if frame.parent then
-			local category = Settings.GetCategory(frame.parent);
-			local subcategory, layout = Settings.RegisterCanvasLayoutSubcategory(category, frame, frame.name, frame.name);
-			subcategory.ID = frame.name;
-			return subcategory, category;
-		else
-			local category, layout = Settings.RegisterCanvasLayoutCategory(frame, frame.name, frame.name);
-			category.ID = frame.name;
-			Settings.RegisterAddOnCategory(category);
-			return category;
-		end
-	end
-end
 
 
 function TargetCharms_msg(text)
@@ -157,60 +133,12 @@ end
 
 function ShouldShow(frameKey)
     if not TargetCharms_Options[frameKey]["enabled"] then return false end
-    if IsInSetup() then return true end
     if not TargetCharms_Options[frameKey]["partyOnly"] then return true end
     return ((GetNumGroupMembers() > 0) and not UnitInRaid("player"))
         or (UnitInRaid("player") and (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")))
 end
 
-function SetControlEnabled(control, enabled)
-    if not control then return end
-    if enabled then
-        if control.Enable then control:Enable() end
-        control:SetAlpha(1)
-    else
-        if control.Disable then control:Disable() end
-        control:SetAlpha(0.5)
-    end
-end
 
-function SetTargetCharmsSectionEnabled(enabled)
-    SetControlEnabled(DraggableToggleButton, enabled)
-    SetControlEnabled(PartyToggleButton, enabled)
-    SetControlEnabled(TargetToggleButton, enabled)
-    SetControlEnabled(IconToggleButton, enabled)
-    SetControlEnabled(EditBox, enabled)
-    SetControlEnabled(ScaleSlider, enabled)
-    SetControlEnabled(AlphaSlider, enabled)
-    SetControlEnabled(XSlider, enabled)
-    SetControlEnabled(YSlider, enabled)
-    for i = 1, #TargetCharms_LayoutDefaults do
-        SetControlEnabled(_G["ButtonPresetOptions" .. i], enabled)
-    end
-end
-
-function SetReadySectionEnabled(enabled)
-    SetControlEnabled(DraggableToggleButton2, enabled)
-    SetControlEnabled(PartyToggleButton2, enabled)
-    SetControlEnabled(EditBox2, enabled)
-    SetControlEnabled(ScaleSlider2, enabled)
-    SetControlEnabled(AlphaSlider2, enabled)
-    SetControlEnabled(WidthSlider2, enabled)
-end
-
-function SetFlareSectionEnabled(enabled)
-    SetControlEnabled(FlareDraggableToggleButton, enabled)
-    SetControlEnabled(FlarePartyToggleButton, enabled)
-    SetControlEnabled(FlareShowIconsToggleButton, enabled)
-    SetControlEnabled(FlareEditBox, enabled)
-    SetControlEnabled(FlareScaleSlider, enabled)
-    SetControlEnabled(FlareAlphaSlider, enabled)
-    SetControlEnabled(FlareXSlider, enabled)
-    SetControlEnabled(FlareYSlider, enabled)
-    for i = 1, #Flare_LayoutDefaults do
-        SetControlEnabled(_G["ButtonFlarePresetOptions" .. i], enabled)
-    end
-end
 
 function CheckFrameViewState()
     if InCombatLockdown() then return end
@@ -235,16 +163,6 @@ function CheckReadyButtonViewState()
         charmBar:Hide()
         topReady:Hide()
     end
-end
-
-function IsInSetup()
-    local TargetCharmsSetup = _G[frameNames[7]];
-    if TargetCharmsSetup ~= nil then
-        if (TargetCharmsSetup:IsShown()) then
-            return true;
-        end
-    end
-    return false;
 end
 
 function SetHideShow(frame)
@@ -273,23 +191,7 @@ function TargetCharms_OnEvent(self, event)
 
         SetupTargetCharms();
 
-        local panel = CreateFrame("Frame", "TargetCharmsPanel", UIParent, "TargetCharmsPanelTemplate");
-
-        panel.name = "TargetCharms";
-        panel.okay = function(self)
-            -- TargetCharmsInterface_Close();
-        end;
-        panel.cancel = function(self)
-            TargetCharmsPanel_CancelOrLoad();
-        end;
-        panel.refresh = function(self)
-            TargetCharmsPanel_OnShow();
-        end;
-        panel.default = function(self)
-            TargetCharms_Reset();
-        end;
-        InterfaceOptions_AddCategory(panel);
-        panel:Hide()
+        TargetCharms_InitSettings();
 
         TargetCharms_msg(TARGETCHARMS_VERSION .. " - " .. TARGETCHARMS_LOADED);
     end
@@ -323,10 +225,6 @@ function TargetCharms_Reset()
     CheckFlareFrameViewState();
     UpdateGlobal();
     TargetCharms_msg(TARGETCHARMS_OPTIONS_RESET);
-    if IsInSetup() then
-        HideSetup();
-        ShowSetup();
-    end
 end
 
 function SetupFrames()
@@ -698,50 +596,39 @@ function LockFlares()
     end
 end
 
-function ShowSetup()
-    --InterfaceOptionsFrame_OpenToCategory("TargetCharms");
-    local setupFrame = _G[frameNames[7]];
-    if setupFrame == nil then
-        setupFrame = CreateFrame("Frame", frameNames[7], UIParent, "TargetCharmsSetupTemplate");
-        for i, v in ipairs(TargetCharms_LayoutDefaults) do
-            button = CreateFrame("Button", "ButtonPresetOptions" .. i, setupFrame, "PresetOptionsTemplate");
-            button:SetID(i);
-            _G[button:GetName() .. "Text"]:SetText(i);
-            button:SetPoint("TOP", setupFrame, "TOP", (setupFrame:GetLeft() - button:GetLeft() + 22 * i), button:GetTop() - setupFrame:GetTop());
+local _origSettingsPanelOnHide
 
-        end
-        for i, v in ipairs(Flare_LayoutDefaults) do
-            button = CreateFrame("Button", "ButtonFlarePresetOptions" .. i, setupFrame, "FlarePresetOptionsTemplate");
-            button:SetID(i);
-            _G[button:GetName() .. "Text"]:SetText(i);
-            button:SetPoint("TOP", setupFrame, "TOP", (setupFrame:GetLeft() - button:GetLeft() + 22 * i), button:GetTop() - setupFrame:GetTop());
-        end
+function ShowSetup()
+    if not TargetCharms_SettingsCategoryID then return end
+    if not InCombatLockdown() then
+        _G[frameNames[1]]:Show()
+        _G[frameNames[3]]:Show()
+        _G[frameNames[4]]:Show()
+        _G[frameNames[6]]:Show()
     end
-    setupFrame:Show();
-    CheckFrameViewState();
-    CheckReadyButtonViewState();
-    CheckFlareFrameViewState();
+    if SettingsPanel and not _origSettingsPanelOnHide then
+        _origSettingsPanelOnHide = SettingsPanel:GetScript("OnHide")
+        SettingsPanel:SetScript("OnHide", function(self)
+            if _origSettingsPanelOnHide then _origSettingsPanelOnHide(self) end
+            SettingsPanel:SetScript("OnHide", _origSettingsPanelOnHide)
+            _origSettingsPanelOnHide = nil
+            HideSetup()
+        end)
+    end
+    Settings.OpenToCategory(TargetCharms_SettingsCategoryID)
 end
 
 function HideSetup()
-    local setupFrame = _G[frameNames[7]];
-    if setupFrame ~= nil then
-        setupFrame:Hide();
-    end
-    UpdateGlobal();
+    UpdateGlobal()
+    LockFlares()
+    SetupButtons(frameNames[1], frameNames[1])
+    SetupButtons(frameNames[5], frameNames[5])
+    CheckFrameViewState()
+    CheckReadyButtonViewState()
+    CheckFlareFrameViewState()
 end
 
-function TargetCharmsInterface_Close()
-end
 
-function TargetCharmsPanel_Close()
-end
-
-function TargetCharmsPanel_CancelOrLoad()
-end
-
-function TargetCharmsPanel_OnShow()
-end
 
 function CopySetup()
     HideSetup();
