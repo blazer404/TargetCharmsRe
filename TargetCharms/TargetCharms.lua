@@ -334,25 +334,32 @@ function MakeButton(frame, buttonNum, isMacro)
         button:SetHeight(32);
         button:SetWidth(32);
         local texture = button:CreateTexture(button:GetName() .. "CharmTex");
+        texture:SetDrawLayer("ARTWORK");
         if isMacro then
             button:SetAttribute("type", "macro")
             button:SetHeight(32);
             button:SetWidth(32);
             local textureColor = button:CreateTexture(button:GetName() .. "TextureColor");
-            textureColor:SetPoint("TOPLEFT", button, "TOPLEFT", 4, -4);
-            textureColor:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -4.5, 4.5);
+            textureColor:SetDrawLayer("BORDER");
+            textureColor:SetPoint("TOPLEFT", _G[button:GetName() .. "CharmTex"], "TOPLEFT", 5, -5);
+            textureColor:SetPoint("BOTTOMRIGHT", _G[button:GetName() .. "CharmTex"], "BOTTOMRIGHT", -5, 5);
             local textureIcon = button:CreateTexture(button:GetName() .. "TextureIcon");
-            textureIcon:SetPoint("TOPLEFT", button, "TOPLEFT", 4, -4);
-            textureIcon:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -4.5, 4.5);
+            textureIcon:SetDrawLayer("OVERLAY");
+            textureIcon:SetAllPoints(button);
         end
     elseif isMacro and not _G[button:GetName() .. "TextureColor"] then
         button:SetAttribute("type", "macro")
+        button:SetSize(32, 32);
         local textureColor = button:CreateTexture(button:GetName() .. "TextureColor");
-        textureColor:SetPoint("TOPLEFT", button, "TOPLEFT", 4, -4);
-        textureColor:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -4.5, 4.5);
+        textureColor:SetDrawLayer("BORDER");
+        textureColor:SetPoint("TOPLEFT", _G[button:GetName() .. "CharmTex"], "TOPLEFT", 5, -5);
+        textureColor:SetPoint("BOTTOMRIGHT", _G[button:GetName() .. "CharmTex"], "BOTTOMRIGHT", -5, 5);
         local textureIcon = button:CreateTexture(button:GetName() .. "TextureIcon");
-        textureIcon:SetPoint("TOPLEFT", button, "TOPLEFT", 4, -4);
-        textureIcon:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -4.5, 4.5);
+        textureIcon:SetDrawLayer("OVERLAY");
+        textureIcon:SetAllPoints(button);
+    end
+    if isMacro then
+        button:SetSize(32, 32);
     end
     return button;
 end
@@ -441,6 +448,11 @@ function FormatButton(frame, buttonNum, posChar, typeNum, xSpacing, ySpacing)
                 button = CreateFrame("Button", frame .. "Charm" .. buttonNum, _G[frame], "DragCharmTemplate")
             end
             button:SetID(buttonNum);
+            button:SetSize(16, 16);
+            local dragTexIcon = _G[button:GetName() .. "TextureIcon"];
+            if dragTexIcon then dragTexIcon:SetTexture() end
+            local dragTexColor = _G[button:GetName() .. "TextureColor"];
+            if dragTexColor then dragTexColor:SetTexture() end
             if TargetCharms_Options["FlareCharms"]["draggable"] then
                 button:RegisterForClicks("AnyDown");
                 button:Show();
@@ -586,11 +598,16 @@ function MakeCharm(frame, button, buttonNum, id, textureID, o1, o2, o3, o4, a1, 
 end
 
 function SetTexture(button, texture, textureID, o1, o2, o3, o4, a1, a2, w, h)
-    texture:SetPoint("TOPLEFT", button, "TOPLEFT", a1, a2);
+    texture:ClearAllPoints();
     texture:SetWidth(w);
     texture:SetHeight(h);
     texture:SetTexture(texturePaths[textureID]);
-    texture:SetTexCoord(o1, o2, o3, o4)
+    texture:SetTexCoord(o1, o2, o3, o4);
+    local offsetY = 0;
+    if textureID == 1 and strsub(texture:GetName(), -11) == "TextureIcon" then
+        offsetY = 1;
+    end
+    texture:SetPoint("CENTER", button, "CENTER", 0, offsetY);
 end
 
 function SetFrameScale(scale, id)
