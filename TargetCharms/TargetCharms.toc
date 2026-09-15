@@ -1,12 +1,12 @@
 ## Interface: 120001
-## X-Min-Interface: 50001
 ## Title: TargetCharms
 ## Notes: Toolbar for setting charms/raid icons on targets. Ctrl+Right-click in game for setup menu or type /tc setup
-## Author: Gander
-## Version: 1.6.4 RE (20/03/2026)
+## Author: BlazeR404 | Gander (until 1.6.4)
+## Version: 1.7.0a RE (16/09/2026)
 ## SavedVariables: TargetCharms_OptionsGlobal
 ## SavedVariablesPerCharacter: TargetCharms_Options
+## X-Min-Interface: 120001
 
 Locales.lua
 TargetCharms.xml
-TargetCharmsSetup.xml
+TargetCharmsSettings.lua
