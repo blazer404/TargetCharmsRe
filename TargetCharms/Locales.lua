@@ -69,19 +69,19 @@ if G_LOCALE == "ruRU" then
     TargetCharms_CMDS = { "reset", "setup" };
 
     TargetCharms_LayoutDefaults = {
-        { "Стандартный", ">1>5v6<2v3>7v8<4v_>0" },
-        { "Классический", ">4>8v7<3v2>6v5<1v_>0" },
-        { "Горизонтальный", ">1>2>3>4>5>6>7>8>0" },
-        { "Вертикальный", ">1v2v3v4v5v6v7v8v0" },
-        { "3x3", ">1v2v3>6^5^4>7v8v0" }
+        { "Стандартный", ">8>7v6<5v4>3v2<1v_>0" },
+        { "Инвертированный", ">0>1v2<3v4>5v6<7v_>8" },
+        { "Горизонтальный", ">8>7>6>5>4>3>2>1>0" },
+        { "Вертикальный", ">8v7v6v5v4v3v2v1v0" },
+        { "3x3", ">8v7v6>5^4^3>2v1v0" }
     };
 
     Flare_LayoutDefaults = {
-        { "Стандартный", ">D>XVW<RvB>SvP<GvO>Y" },
-        { "Классический", ">DVY>SVB<OVP>RVW<GV_>X" },
-        { "Горизонтальный", ">D>R>W>S>B>G>P>O>Y>X" },
-        { "Вертикальный", ">DvRvWvSvBvGvPvOvYvX" },
-        { "3x3", ">D>R>W>SvB<G<PvO>Y>X" }
+        { "Стандартный", ">D>W>RvB<SvG>PvO<Yv_>X" },
+        { "Инвертированный", ">D>X>YvO<PvG>SvB<Rv_>W" },
+        { "Горизонтальный", ">D>W>R>B>S>G>P>O>Y>X" },
+        { "Вертикальный", ">D>WvRvBvSvGvPvOvYvX" },
+        { "3x3", ">D>WvRvB>S^G^P>OvYvX" }
     };
 else
     TARGETCHARMS_TITLE = "TargetCharms";
@@ -153,18 +153,18 @@ else
     TargetCharms_CMDS = { "reset", "setup" };
 
     TargetCharms_LayoutDefaults = {
-        { "Standard", ">1>5v6<2v3>7v8<4v_>0" },
-        { "Classic", ">4>8v7<3v2>6v5<1v_>0" },
-        { "Horizontal", ">1>2>3>4>5>6>7>8>0" },
-        { "Vertical", ">1v2v3v4v5v6v7v8v0" },
-        { "3x3", ">1v2v3>6^5^4>7v8v0" }
+        { "Standard", ">8>7v6<5v4>3v2<1v_>0" },
+        { "Inverted", ">0>1v2<3v4>5v6<7v_>8" },
+        { "Horizontal", ">8>7>6>5>4>3>2>1>0" },
+        { "Vertical", ">8v7v6v5v4v3v2v1v0" },
+        { "3x3", ">8v7v6>5^4^3>2v1v0" }
     };
 
     Flare_LayoutDefaults = {
-        { "Standard", ">D>XVW<RvB>SvP<GvO>Y" },
-        { "Classic", ">DVY>SVB<OVP>RVW<GV_>X" },
-        { "Horizontal", ">D>R>W>S>B>G>P>O>Y>X" },
-        { "Vertical", ">DvRvWvSvBvGvPvOvYvX" },
-        { "3x3", ">D>R>W>SvB<G<PvO>Y>X" }
+        { "Standard", ">D>W>RvB<SvG>PvO<Yv_>X" },
+        { "Inverted", ">D>X>YvO<PvG>SvB<Rv_>W" },
+        { "Horizontal", ">D>W>R>B>S>G>P>O>Y>X" },
+        { "Vertical", ">D>WvRvBvSvGvPvOvYvX" },
+        { "3x3", ">D>WvRvB>S^G^P>OvYvX" }
     };
 end

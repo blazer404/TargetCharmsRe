@@ -14,7 +14,7 @@ Defaults = {
         ["toggleicon"] = false,
         ["alphaVal"] = 0.5,
         ["showontarget"] = true,
-        ["buttonTemplate"] = ">1>5v6<2v3>7v8<4v_>0",
+        ["buttonTemplate"] = ">8>7v6<5v4>3v2<1v_>0",
     },
     ["ReadyCharm"] = {
         ["X"] = nil,
@@ -38,7 +38,7 @@ Defaults = {
         ["Xspacing"] = 0,
         ["Yspacing"] = 0,
         ["showicons"] = false,
-        ["buttonTemplate"] = ">D>XVW<RvB>SvP<GvO>Y",
+        ["buttonTemplate"] = ">D>W>RvB<SvG>PvO<Yv_>X",
     },
 
 };
