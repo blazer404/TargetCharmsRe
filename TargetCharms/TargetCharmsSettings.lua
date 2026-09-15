@@ -164,9 +164,9 @@ function TargetCharms_InitSettings()
 	do
 		local s = Settings.RegisterProxySetting(category, "TC_SCALE", Settings.VarType.Number, TARGETCHARMS_OPTIONS_SCALE, 1.0,
 			function() return TargetCharms_Options["TargetCharms"]["barscale"] end,
-			function(v) v = SnapSliderValue(v, 0.2, 2.0, 0.1); TargetCharms_Options["TargetCharms"]["barscale"] = v; SetFrameScale(v, 1) end)
-		local o = Settings.CreateSliderOptions(0.2, 2.0, 0.1)
-		o.steps = 18
+			function(v) v = SnapSliderValue(v, 0.5, 3.0, 0.1); TargetCharms_Options["TargetCharms"]["barscale"] = v; SetFrameScale(v, 1) end)
+		local o = Settings.CreateSliderOptions(0.5, 3.0, 0.1)
+		o.steps = 25
 		o:SetLabelFormatter(RIGHT)
 		o.formatters[RIGHT] = CreateSliderLabelFormatter(0.1)
 		local init = Settings.CreateSlider(category, s, o)
@@ -281,9 +281,9 @@ function TargetCharms_InitSettings()
 	do
 		local s = Settings.RegisterProxySetting(category, "FL_SCALE", Settings.VarType.Number, TARGETCHARMS_OPTIONS_SCALE, 1.0,
 			function() return TargetCharms_Options["FlareCharms"]["barscale"] end,
-			function(v) v = SnapSliderValue(v, 0.2, 2.0, 0.1); TargetCharms_Options["FlareCharms"]["barscale"] = v; SetFrameScale(v, 5) end)
-		local o = Settings.CreateSliderOptions(0.2, 2.0, 0.1)
-		o.steps = 18
+			function(v) v = SnapSliderValue(v, 0.5, 3.0, 0.1); TargetCharms_Options["FlareCharms"]["barscale"] = v; SetFrameScale(v, 5) end)
+		local o = Settings.CreateSliderOptions(0.5, 3.0, 0.1)
+		o.steps = 25
 		o:SetLabelFormatter(RIGHT)
 		o.formatters[RIGHT] = CreateSliderLabelFormatter(0.1)
 		local init = Settings.CreateSlider(category, s, o)
@@ -390,9 +390,9 @@ function TargetCharms_InitSettings()
 	do
 		local s = Settings.RegisterProxySetting(category, "RC_SCALE", Settings.VarType.Number, TARGETCHARMS_OPTIONS_SCALE, 1.0,
 			function() return TargetCharms_Options["ReadyCharm"]["barscale"] end,
-			function(v) v = SnapSliderValue(v, 0.2, 2.0, 0.1); TargetCharms_Options["ReadyCharm"]["barscale"] = v; _G["ReadyCharm"]:SetScale(v) end)
-		local o = Settings.CreateSliderOptions(0.2, 2.0, 0.1)
-		o.steps = 18
+			function(v) v = SnapSliderValue(v, 0.5, 3.0, 0.1); TargetCharms_Options["ReadyCharm"]["barscale"] = v; _G["ReadyCharm"]:SetScale(v) end)
+		local o = Settings.CreateSliderOptions(0.5, 3.0, 0.1)
+		o.steps = 25
 		o:SetLabelFormatter(RIGHT)
 		o.formatters[RIGHT] = CreateSliderLabelFormatter(0.1)
 		local init = Settings.CreateSlider(category, s, o)

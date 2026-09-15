@@ -226,8 +226,8 @@ function NormalizeOptionValues()
             TargetCharms_Options[block]["alphaVal"] = 1.0
         end
         local scale = TargetCharms_Options[block]["barscale"] or 1.0
-        scale = math.max(0.2, math.min(2.0, scale))
-        scale = math.floor((scale - 0.2) / 0.1 + 0.5) * 0.1 + 0.2
+        scale = math.max(0.5, math.min(3.0, scale))
+        scale = math.floor((scale - 0.5) / 0.1 + 0.5) * 0.1 + 0.5
         TargetCharms_Options[block]["barscale"] = tonumber(string.format("%.1f", scale))
     end
 end
