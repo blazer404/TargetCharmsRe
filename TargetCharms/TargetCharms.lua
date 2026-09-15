@@ -277,11 +277,16 @@ function AutoSizeReadyButton()
     local fs = button:GetFontString()
     if not fs then return end
     local textWidth = fs:GetStringWidth() or 0
-    local textHeight = fs:GetStringHeight() or 12
-    if textWidth == 0 then return end
+    local textHeight = fs:GetStringHeight() or 0
+    if textHeight == 0 then
+        textHeight = 12
+    end
     local padX, padY = 12, 8
     local width = math.ceil(textWidth) + padX * 2
     local height = math.ceil(textHeight) + padY * 2
+    if textWidth == 0 then
+        width = height
+    end
     button:SetWidth(width)
     button:SetHeight(height)
     parent:SetWidth(width)
