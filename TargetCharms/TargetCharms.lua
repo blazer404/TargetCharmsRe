@@ -337,9 +337,17 @@ function MakeButton(frame, buttonNum, isMacro)
             textureColor:SetPoint("TOPLEFT", button, "TOPLEFT", 4, -4);
             textureColor:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -4.5, 4.5);
             local textureIcon = button:CreateTexture(button:GetName() .. "TextureIcon");
-            textureColor:SetPoint("TOPLEFT", button, "TOPLEFT", 4, -4)
-            textureColor:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -4.5, 4.5)
+            textureIcon:SetPoint("TOPLEFT", button, "TOPLEFT", 4, -4);
+            textureIcon:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -4.5, 4.5);
         end
+    elseif isMacro and not _G[button:GetName() .. "TextureColor"] then
+        button:SetAttribute("type", "macro")
+        local textureColor = button:CreateTexture(button:GetName() .. "TextureColor");
+        textureColor:SetPoint("TOPLEFT", button, "TOPLEFT", 4, -4);
+        textureColor:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -4.5, 4.5);
+        local textureIcon = button:CreateTexture(button:GetName() .. "TextureIcon");
+        textureIcon:SetPoint("TOPLEFT", button, "TOPLEFT", 4, -4);
+        textureIcon:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -4.5, 4.5);
     end
     return button;
 end
@@ -567,7 +575,9 @@ end
 function MakeCharm(frame, button, buttonNum, id, textureID, o1, o2, o3, o4, a1, a2, w, h)
     buttonCharm[frame][buttonNum] = id;
     local texture = _G[button:GetName() .. "CharmTex"];
-    SetTexture(button, texture, textureID, o1, o2, o3, o4, a1, a2, w, h);
+    if texture then
+        SetTexture(button, texture, textureID, o1, o2, o3, o4, a1, a2, w, h);
+    end
 end
 
 function SetTexture(button, texture, textureID, o1, o2, o3, o4, a1, a2, w, h)
