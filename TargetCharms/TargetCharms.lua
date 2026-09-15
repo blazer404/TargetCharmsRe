@@ -1,6 +1,9 @@
 TARGETCHARMS_VERSION = C_AddOns.GetAddOnMetadata("TargetCharms", "Version");
 TARGETCHARMS_DB_VERSION = "1.6.4";
 
+local DEFAULT_PRESET_INDEX_TARGET = 1;
+local DEFAULT_PRESET_INDEX_FLARE = 1;
+
 Defaults = {
     ["TargetCharms"] = {
         ["X"] = nil,
@@ -14,7 +17,7 @@ Defaults = {
         ["toggleicon"] = false,
         ["alphaVal"] = 0.5,
         ["showontarget"] = true,
-        ["buttonTemplate"] = ">8>7v6<5v4>3v2<1v_>0",
+        ["buttonTemplate"] = TargetCharms_LayoutDefaults[DEFAULT_PRESET_INDEX_TARGET][2],
     },
     ["ReadyCharm"] = {
         ["X"] = nil,
@@ -38,7 +41,7 @@ Defaults = {
         ["Xspacing"] = 0,
         ["Yspacing"] = 0,
         ["showicons"] = false,
-        ["buttonTemplate"] = ">D>W>RvB<SvG>PvO<Yv_>X",
+        ["buttonTemplate"] = Flare_LayoutDefaults[DEFAULT_PRESET_INDEX_FLARE][2],
     },
 
 };
@@ -680,6 +683,7 @@ end
 function CopySetup()
     HideSetup();
     TargetCharms_Options = CopyOldValues(CloneTable(TargetCharms_OptionsGlobal), TargetCharms_OptionsGlobal);
+    TargetCharms_ResetCustomLayoutMode();
     SetupTargetCharms();
     TargetCharms_SettingsRefresh();
     ShowSetup();
