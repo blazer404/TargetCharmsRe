@@ -38,7 +38,7 @@ Defaults = {
         ["Xspacing"] = 0,
         ["Yspacing"] = 0,
         ["showicons"] = false,
-        ["buttonTemplate"] = ">DvW>RvS<BvG>PvY<OV_>X",
+        ["buttonTemplate"] = ">D>XVW<RvB>SvP<GvO>Y",
     },
 
 };
@@ -236,6 +236,7 @@ function TargetCharms_Reset()
     TargetCharms_Options = CloneTable(Defaults);
     TargetCharms_Options["Version"] = TARGETCHARMS_DB_VERSION;
     TargetCharms_Options["Name"] = UnitName("player");
+    TargetCharms_ResetCustomLayoutMode();
     SetupTargetCharms();
     CheckFrameViewState();
     CheckReadyButtonViewState();
@@ -652,6 +653,7 @@ function CopySetup()
     HideSetup();
     TargetCharms_Options = CopyOldValues(CloneTable(TargetCharms_OptionsGlobal), TargetCharms_OptionsGlobal);
     SetupTargetCharms();
+    TargetCharms_SettingsRefresh();
     ShowSetup();
 end
 

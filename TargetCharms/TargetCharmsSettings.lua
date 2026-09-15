@@ -96,6 +96,11 @@ local CUSTOM_LAYOUT = "CUSTOM"
 
 local customLayoutMode = {}
 
+function TargetCharms_ResetCustomLayoutMode()
+	customLayoutMode["TargetCharms"] = false
+	customLayoutMode["FlareCharms"] = false
+end
+
 local settingsRefreshVariables = {
 	"TC_ENABLED", "TC_DRAG", "TC_PARTY", "TC_SHOWTARGET", "TC_TOGGLE", "TC_SCALE", "TC_OPACITY", "TC_XSPACING", "TC_YSPACING", "TC_TEMPLATE", "TC_PRESET",
 	"RC_ENABLED", "RC_DRAG", "RC_PARTY", "RC_SCALE", "RC_OPACITY", "RC_TEXT",
@@ -141,7 +146,7 @@ function TargetCharms_InitSettings()
 	end
 
 	do
-		local s = Settings.RegisterProxySetting(category, "TC_SHOWTARGET", Settings.VarType.Boolean, TARGETCHARMS_OPTIONS_SHOWONTARGET, false,
+		local s = Settings.RegisterProxySetting(category, "TC_SHOWTARGET", Settings.VarType.Boolean, TARGETCHARMS_OPTIONS_SHOWONTARGET, true,
 			function() return TargetCharms_Options["TargetCharms"]["showontarget"] end,
 			function(v) TargetCharms_Options["TargetCharms"]["showontarget"] = v; SetTargetHideShow() end)
 		local init = Settings.CreateCheckbox(category, s)
@@ -169,7 +174,7 @@ function TargetCharms_InitSettings()
 	end
 
 	do
-		local s = Settings.RegisterProxySetting(category, "TC_OPACITY", Settings.VarType.Number, TARGETCHARMS_OPTIONS_OPACITY, 1.0,
+		local s = Settings.RegisterProxySetting(category, "TC_OPACITY", Settings.VarType.Number, TARGETCHARMS_OPTIONS_OPACITY, 0.5,
 			function() return TargetCharms_Options["TargetCharms"]["alphaVal"] end,
 			function(v) v = SnapSliderValue(v, 0.1, 1.0, 0.1); TargetCharms_Options["TargetCharms"]["alphaVal"] = v; TopCharm:SetAlpha(v) end)
 		local o = Settings.CreateSliderOptions(0.1, 1.0, 0.1)
@@ -286,7 +291,7 @@ function TargetCharms_InitSettings()
 	end
 
 	do
-		local s = Settings.RegisterProxySetting(category, "FL_OPACITY", Settings.VarType.Number, TARGETCHARMS_OPTIONS_OPACITY, 1.0,
+		local s = Settings.RegisterProxySetting(category, "FL_OPACITY", Settings.VarType.Number, TARGETCHARMS_OPTIONS_OPACITY, 0.5,
 			function() return TargetCharms_Options["FlareCharms"]["alphaVal"] end,
 			function(v) v = SnapSliderValue(v, 0.1, 1.0, 0.1); TargetCharms_Options["FlareCharms"]["alphaVal"] = v; TopFlare:SetAlpha(v) end)
 		local o = Settings.CreateSliderOptions(0.1, 1.0, 0.1)
@@ -447,4 +452,14 @@ function TargetCharms_InitSettings()
 
 	Settings.RegisterAddOnCategory(category)
 	TargetCharms_SettingsCategoryID = category:GetID()
+
+	EventRegistry:RegisterCallback("Settings.Defaulted", function()
+		TargetCharms_Reset()
+	end)
+
+	EventRegistry:RegisterCallback("Settings.CategoryDefaulted", function(_, defaultedCategory)
+		if defaultedCategory == category then
+			TargetCharms_Reset()
+		end
+	end)
 end
