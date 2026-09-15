@@ -603,11 +603,7 @@ function SetTexture(button, texture, textureID, o1, o2, o3, o4, a1, a2, w, h)
     texture:SetHeight(h);
     texture:SetTexture(texturePaths[textureID]);
     texture:SetTexCoord(o1, o2, o3, o4);
-    local offsetY = 0;
-    if textureID == 1 and strsub(texture:GetName(), -11) == "TextureIcon" then
-        offsetY = 1;
-    end
-    texture:SetPoint("CENTER", button, "CENTER", 0, offsetY);
+    texture:SetPoint("CENTER", button, "CENTER", 0, 0);
 end
 
 function SetFrameScale(scale, id)
