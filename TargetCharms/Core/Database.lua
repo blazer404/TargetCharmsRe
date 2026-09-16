@@ -2,48 +2,6 @@ TARGETCHARMS_DB_VERSION = "1.6.4";
 
 local frameNames = TARGETCHARMS_FRAME_NAMES;
 
-Defaults = {
-    ["TargetCharms"] = {
-        ["X"] = nil,
-        ["Y"] = nil,
-        ["enabled"] = true,
-        ["partyOnly"] = false,
-        ["barscale"] = 1.0,
-        ["Xspacing"] = 0,
-        ["Yspacing"] = 0,
-        ["draggable"] = true,
-        ["toggleicon"] = false,
-        ["alphaVal"] = 0.5,
-        ["showontarget"] = true,
-        ["buttonTemplate"] = TargetCharms_LayoutDefaults[1][2],
-    },
-    ["ReadyCharm"] = {
-        ["X"] = nil,
-        ["Y"] = nil,
-        ["enabled"] = true,
-        ["partyOnly"] = false,
-        ["barscale"] = 1.0,
-        ["draggable"] = true,
-        ["alphaVal"] = 0.5,
-        ["width"] = 60,
-        ["text"] = TARGETCHARMS_READYCHECK_TEXT,
-    },
-    ["FlareCharms"] = {
-        ["X"] = nil,
-        ["Y"] = nil,
-        ["enabled"] = true,
-        ["partyOnly"] = false,
-        ["barscale"] = 1.0,
-        ["draggable"] = true,
-        ["alphaVal"] = 0.5,
-        ["Xspacing"] = 0,
-        ["Yspacing"] = 0,
-        ["showicons"] = false,
-        ["buttonTemplate"] = Flare_LayoutDefaults[1][2],
-    },
-
-};
-
 --Code by Grayhoof (SCT)
 function CloneTable(t)
     -- return a copy of the table t
