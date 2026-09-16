@@ -1,23 +1,11 @@
 TARGETCHARMS_VERSION = C_AddOns.GetAddOnMetadata("TargetCharms", "Version");
 
-local frameNames = {
-    "TargetCharms",
-    "TopCharm",
-    "ReadyCharm",
-    "TopReady",
-    "FlareCharms",
-    "TopFlare",
-};
+local frameNames = TARGETCHARMS_FRAME_NAMES;
 local buttonCharm = {
     ["TargetCharms"] = {},
     ["FlareCharms"] = {}
 };
-local texturePaths = {
-    "interface\\targetingframe\\UI-RaidTargetingIcons.blp",
-    "interface\\buttons\\UI-Quickslot.blp",
-    "interface\\buttons\\UI-GroupLoot-Pass-Up.blp",
-    "interface\\icons\\ability_hunter_snipershot.blp"
-};
+local texturePaths = TARGETCHARMS_TEXTURE_PATHS;
 
 
 function TargetCharms_msg(text)

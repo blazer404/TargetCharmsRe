@@ -9,6 +9,13 @@ TARGETCHARMS_FRAME_NAMES = {
     "TopFlare",
 };
 
+TARGETCHARMS_TEXTURE_PATHS = {
+    "interface\\targetingframe\\UI-RaidTargetingIcons.blp",
+    "interface\\buttons\\UI-Quickslot.blp",
+    "interface\\buttons\\UI-GroupLoot-Pass-Up.blp",
+    "interface\\icons\\ability_hunter_snipershot.blp"
+};
+
 TargetCharms_LayoutDefaults = {
     { "Стандартный", ">8>7v6<5v4>3v2<1v_>0" },
     { "Инвертированный", ">0>1v2<3v4>5v6<7v_>8" },
