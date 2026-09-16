@@ -7,7 +7,8 @@
 ## SavedVariablesPerCharacter: TargetCharms_Options
 ## X-Min-Interface: 120001
 
+Localization\enUS.lua
+Localization\ruRU.lua
 Core\Constants.lua
-Locales.lua
 TargetCharms.xml
 TargetCharmsSettings.lua
