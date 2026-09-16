@@ -1,4 +1,13 @@
--- Layout format constants (locale-independent)
+-- Constants
+
+TARGETCHARMS_FRAME_NAMES = {
+    "TargetCharms",
+    "TopCharm",
+    "ReadyCharm",
+    "TopReady",
+    "FlareCharms",
+    "TopFlare",
+};
 
 TargetCharms_LayoutDefaults = {
     { "Стандартный", ">8>7v6<5v4>3v2<1v_>0" },

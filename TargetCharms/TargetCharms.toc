@@ -10,5 +10,6 @@
 Localization\enUS.lua
 Localization\ruRU.lua
 Core\Constants.lua
+Core\Database.lua
 TargetCharms.xml
 TargetCharmsSettings.lua
