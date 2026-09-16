@@ -1,6 +1,8 @@
 -- Constants
+TARGETCHARMS_VERSION = C_AddOns.GetAddOnMetadata("TargetCharms", "Version");
+TARGETCHARMS_DB_VERSION = "1.6.4";
 
-TARGETCHARMS_FRAME_NAMES = {
+TC_FRAME_NAMES = {
     "TargetCharms",
     "TopCharm",
     "ReadyCharm",
@@ -9,14 +11,14 @@ TARGETCHARMS_FRAME_NAMES = {
     "TopFlare",
 };
 
-TARGETCHARMS_TEXTURE_PATHS = {
+TC_TEXTURE_PATHS = {
     "interface\\targetingframe\\UI-RaidTargetingIcons.blp",
     "interface\\buttons\\UI-Quickslot.blp",
     "interface\\buttons\\UI-GroupLoot-Pass-Up.blp",
     "interface\\icons\\ability_hunter_snipershot.blp"
 };
 
-TargetCharms_LayoutDefaults = {
+TC_DEFAULT_LAYOUTS_CHARMS = {
     { "Стандартный", ">8>7v6<5v4>3v2<1v_>0" },
     { "Инвертированный", ">0>1v2<3v4>5v6<7v_>8" },
     { "Горизонтальный", ">8>7>6>5>4>3>2>1>0" },
@@ -24,7 +26,7 @@ TargetCharms_LayoutDefaults = {
     { "3x3", ">8v7v6>5^4^3>2v1v0" }
 };
 
-Flare_LayoutDefaults = {
+TC_DEFAULT_LAYOUTS_FLARE = {
     { "Стандартный", ">D>W>RvB<SvG>PvO<Yv_>X" },
     { "Инвертированный", ">D>X>YvO<PvG>SvB<Rv_>W" },
     { "Горизонтальный", ">D>W>R>B>S>G>P>O>Y>X" },
@@ -32,7 +34,7 @@ Flare_LayoutDefaults = {
     { "3x3", ">D>WvRvB>S^G^P>OvYvX" }
 };
 
-TARGETCHARMS_DEFAULTS = {
+TC_DEFAULTS = {
     ["TargetCharms"] = {
         ["X"] = nil,
         ["Y"] = nil,
@@ -45,7 +47,7 @@ TARGETCHARMS_DEFAULTS = {
         ["toggleicon"] = false,
         ["alphaVal"] = 0.5,
         ["showontarget"] = true,
-        ["buttonTemplate"] = TargetCharms_LayoutDefaults[1][2],
+        ["buttonTemplate"] = TC_DEFAULT_LAYOUTS_CHARMS[1][2],
     },
     ["ReadyCharm"] = {
         ["X"] = nil,
@@ -69,9 +71,8 @@ TARGETCHARMS_DEFAULTS = {
         ["Xspacing"] = 0,
         ["Yspacing"] = 0,
         ["showicons"] = false,
-        ["buttonTemplate"] = Flare_LayoutDefaults[1][2],
+        ["buttonTemplate"] = TC_DEFAULT_LAYOUTS_FLARE[1][2],
     },
-
 };
 
-Defaults = TARGETCHARMS_DEFAULTS;
+Defaults = TC_DEFAULTS;

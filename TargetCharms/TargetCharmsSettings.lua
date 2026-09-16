@@ -222,7 +222,7 @@ function TargetCharms_InitSettings()
 
 	do
 		local s = Settings.RegisterProxySetting(category, "TC_PRESET", Settings.VarType.String, TARGETCHARMS_OPTIONS_PRESETS_TITLE, Defaults["TargetCharms"]["buttonTemplate"],
-			function() return customLayoutMode["TargetCharms"] and CUSTOM_LAYOUT or FindPresetPattern(TargetCharms_LayoutDefaults, TargetCharms_Options["TargetCharms"]["buttonTemplate"]) or CUSTOM_LAYOUT end,
+			function() return customLayoutMode["TargetCharms"] and CUSTOM_LAYOUT or FindPresetPattern(TC_DEFAULT_LAYOUTS_CHARMS, TargetCharms_Options["TargetCharms"]["buttonTemplate"]) or CUSTOM_LAYOUT end,
 			function(v)
 				if v == CUSTOM_LAYOUT then
 					customLayoutMode["TargetCharms"] = true
@@ -234,7 +234,7 @@ function TargetCharms_InitSettings()
 			end)
 		local function GetPresetOptions()
 			local container = Settings.CreateControlTextContainer()
-			for _, v in ipairs(TargetCharms_LayoutDefaults) do
+			for _, v in ipairs(TC_DEFAULT_LAYOUTS_CHARMS) do
 				container:Add(v[2], v[1])
 			end
 			container:Add(CUSTOM_LAYOUT, TARGETCHARMS_OPTIONS_CUSTOM_LAYOUT)
@@ -253,7 +253,7 @@ function TargetCharms_InitSettings()
 			end)
 		local init = Settings.CreateControlInitializer("TargetCharmsEditBoxControlTemplate", s)
 		init:SetParentInitializer(tcParent, function() return tcEnabledSetting:GetValue() end)
-		init:AddShownPredicate(function() return customLayoutMode["TargetCharms"] or not FindPresetPattern(TargetCharms_LayoutDefaults, TargetCharms_Options["TargetCharms"]["buttonTemplate"]) end)
+		init:AddShownPredicate(function() return customLayoutMode["TargetCharms"] or not FindPresetPattern(TC_DEFAULT_LAYOUTS_CHARMS, TargetCharms_Options["TargetCharms"]["buttonTemplate"]) end)
 		layout:AddInitializer(init)
 	end
 
@@ -339,7 +339,7 @@ function TargetCharms_InitSettings()
 
 	do
 		local s = Settings.RegisterProxySetting(category, "FL_PRESET", Settings.VarType.String, TARGETCHARMS_OPTIONS_PRESETS_TITLE, Defaults["FlareCharms"]["buttonTemplate"],
-			function() return customLayoutMode["FlareCharms"] and CUSTOM_LAYOUT or FindPresetPattern(Flare_LayoutDefaults, TargetCharms_Options["FlareCharms"]["buttonTemplate"]) or CUSTOM_LAYOUT end,
+			function() return customLayoutMode["FlareCharms"] and CUSTOM_LAYOUT or FindPresetPattern(TC_DEFAULT_LAYOUTS_FLARE, TargetCharms_Options["FlareCharms"]["buttonTemplate"]) or CUSTOM_LAYOUT end,
 			function(v)
 				if v == CUSTOM_LAYOUT then
 					customLayoutMode["FlareCharms"] = true
@@ -351,7 +351,7 @@ function TargetCharms_InitSettings()
 			end)
 		local function GetPresetOptions()
 			local container = Settings.CreateControlTextContainer()
-			for _, v in ipairs(Flare_LayoutDefaults) do
+			for _, v in ipairs(TC_DEFAULT_LAYOUTS_FLARE) do
 				container:Add(v[2], v[1])
 			end
 			container:Add(CUSTOM_LAYOUT, TARGETCHARMS_OPTIONS_CUSTOM_LAYOUT)
@@ -370,7 +370,7 @@ function TargetCharms_InitSettings()
 			end)
 		local init = Settings.CreateControlInitializer("TargetCharmsEditBoxControlTemplate", s)
 		init:SetParentInitializer(flParent, function() return flEnabledSetting:GetValue() end)
-		init:AddShownPredicate(function() return customLayoutMode["FlareCharms"] or not FindPresetPattern(Flare_LayoutDefaults, TargetCharms_Options["FlareCharms"]["buttonTemplate"]) end)
+		init:AddShownPredicate(function() return customLayoutMode["FlareCharms"] or not FindPresetPattern(TC_DEFAULT_LAYOUTS_FLARE, TargetCharms_Options["FlareCharms"]["buttonTemplate"]) end)
 		layout:AddInitializer(init)
 	end
 

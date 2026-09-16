@@ -1,11 +1,10 @@
-TARGETCHARMS_VERSION = C_AddOns.GetAddOnMetadata("TargetCharms", "Version");
+local frameNames = TC_FRAME_NAMES;
+local texturePaths = TC_TEXTURE_PATHS;
 
-local frameNames = TARGETCHARMS_FRAME_NAMES;
 local buttonCharm = {
     ["TargetCharms"] = {},
     ["FlareCharms"] = {}
 };
-local texturePaths = TARGETCHARMS_TEXTURE_PATHS;
 
 
 function TargetCharms_msg(text)
