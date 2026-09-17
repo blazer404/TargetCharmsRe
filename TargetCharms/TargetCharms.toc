@@ -12,6 +12,7 @@ Localization\ruRU.lua
 Core\Constants.lua
 Core\Database.lua
 Commands\SlashCommands.lua
+UI\FrameState.lua
 UI\ReadyButton.lua
 UI\Flares.lua
 TargetCharms.xml
