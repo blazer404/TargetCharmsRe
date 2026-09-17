@@ -19,4 +19,5 @@ UI\Flares.lua
 UI\CharmButtons.lua
 UI\Setup.lua
 TargetCharms.xml
+UI\SettingsEditBox.lua
 TargetCharmsSettings.lua
