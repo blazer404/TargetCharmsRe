@@ -63,31 +63,6 @@ function TargetCharmsEditBoxControlMixin:Release()
 	SettingsControlMixin.Release(self);
 end
 
-local function StepDecimals(step)
-	local d = 0
-	local s = step
-	while s - math.floor(s) > 1e-6 do
-		d = d + 1
-		s = s * 10
-	end
-	return d
-end
-
-local function SnapSliderValue(v, minValue, maxValue, step)
-	v = math.max(minValue, math.min(maxValue, v))
-	local steps = math.floor((v - minValue) / step + 0.5)
-	local value = minValue + steps * step
-	return tonumber(string.format("%." .. StepDecimals(step) .. "f", value))
-end
-
-local function CreateSliderLabelFormatter(step)
-	local decimals = StepDecimals(step)
-	local fmt = "%." .. decimals .. "f"
-	return function(value)
-		return string.format(fmt, value)
-	end
-end
-
 local function CreateEnableGate(setting)
 	return Settings.CreateControlInitializer("SettingsCheckboxControlTemplate", setting)
 end
