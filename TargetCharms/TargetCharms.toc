@@ -10,6 +10,7 @@
 Localization\enUS.lua
 Localization\ruRU.lua
 Core\Constants.lua
+Core\Utils.lua
 Core\Database.lua
 Commands\SlashCommands.lua
 UI\FrameState.lua
