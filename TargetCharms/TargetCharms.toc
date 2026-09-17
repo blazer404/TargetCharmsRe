@@ -15,6 +15,7 @@ Commands\SlashCommands.lua
 UI\FrameState.lua
 UI\ReadyButton.lua
 UI\Flares.lua
+UI\CharmButtons.lua
 UI\Setup.lua
 TargetCharms.xml
 TargetCharmsSettings.lua
