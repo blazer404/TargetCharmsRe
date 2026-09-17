@@ -13,5 +13,6 @@ Core\Constants.lua
 Core\Database.lua
 Commands\SlashCommands.lua
 UI\ReadyButton.lua
+UI\Flares.lua
 TargetCharms.xml
 TargetCharmsSettings.lua
