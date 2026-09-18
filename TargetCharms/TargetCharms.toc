@@ -13,10 +13,10 @@ Core\Constants.lua
 Core\Utils.lua
 Core\Database.lua
 Commands\SlashCommands.lua
-UI\Widgets\FrameState.lua
-UI\Widgets\ReadyButton.lua
-UI\Widgets\Flares.lua
-UI\Widgets\CharmButtons.lua
+UI\Widgets\BarVisibility.lua
+UI\Widgets\ReadyCheckButton.lua
+UI\Widgets\FlareBar.lua
+UI\Widgets\CharmBar.lua
 UI\Settings\Setup.lua
 TargetCharms.xml
 UI\Settings\SettingsEditBox.lua
