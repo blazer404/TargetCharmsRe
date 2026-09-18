@@ -20,6 +20,7 @@ UI\CharmButtons.lua
 UI\Setup.lua
 TargetCharms.xml
 UI\SettingsEditBox.lua
+UI\TargetSettings.lua
 UI\FlareSettings.lua
 UI\ReadySettings.lua
 TargetCharmsSettings.lua
