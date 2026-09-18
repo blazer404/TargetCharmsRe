@@ -1,4 +1,6 @@
---LOCALES: enUS - default locale
+--- LOCALES: enUS
+--- Локаль по-умолчанию.
+--- Если нет подходящей локали из настроек игры -  будет использоваться именно она
 
 TARGETCHARMS_TITLE = "TargetCharms";
 

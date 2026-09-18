@@ -1,5 +1,11 @@
+--- Панель меток на земле: режим перемещения
+--- Включает/выключает перетаскивание панели меток на земле и синхронизирует подписи/текстуру панели в режиме перемещения
+
+
+---@type string[]
 local frameNames = TC_FRAME_NAMES;
 
+--- Переводит панель в режим перемещения
 function MoveFlares()
     local frame = _G[frameNames[5]];
     frame:EnableMouse(true);
@@ -17,6 +23,7 @@ function MoveFlares()
     frame:SetText(TARGETCHARMS_OPTIONS_FLARE_LOCK_BUTTON);
 end
 
+--- Выход из режима перемещения
 function LockFlares()
     if (not InCombatLockdown()) then
         local frame = _G[frameNames[5]];

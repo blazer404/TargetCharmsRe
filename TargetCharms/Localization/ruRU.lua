@@ -1,4 +1,4 @@
---LOCALES: ruRU
+--- LOCALES: ruRU
 
 local G_LOCALE = GetLocale();
 if G_LOCALE == "ruRU" then

@@ -1,5 +1,13 @@
+--- Настройка-поле ввода текста. Расширяет SettingsControlMixin - добавляет EditBox, в котором можно свободно вводить текст
+
+
+--- @class TargetCharmsEditBoxControlMixin : SettingsControlMixin
+--- @field SettingEditBox EditBox|nil Поле ввода
+--- @field suspendWriteback boolean Признак подавления записи в настройку (при программной установке текста)
 TargetCharmsEditBoxControlMixin = CreateFromMixins(SettingsControlMixin);
 
+--- Создаёт `поле ввода` в строке настройки.
+--- Вызывается фреймворком при создании контрола
 function TargetCharmsEditBoxControlMixin:OnLoad()
     SettingsControlMixin.OnLoad(self);
 
@@ -11,6 +19,8 @@ function TargetCharmsEditBoxControlMixin:OnLoad()
     self.SettingEditBox:SetMaxLetters(512);
 end
 
+--- Инициализация контрола - `подставляет` текущее `значение` настройки в поле ввода
+--- @param initializer table Обёртка настройки (инициализатор списка настроек)
 function TargetCharmsEditBoxControlMixin:Init(initializer)
     SettingsControlMixin.Init(self, initializer);
 
@@ -25,9 +35,11 @@ function TargetCharmsEditBoxControlMixin:Init(initializer)
     self:EvaluateState();
 end
 
+--- Обработка `ввода игрока` - записывает текст в настройку, если он изменился
+--- @param userInput boolean Признак ввода пользователем (а не программного изменения)
 function TargetCharmsEditBoxControlMixin:OnEditBoxTextChanged(userInput)
     if self.suspendWriteback then
-        return;
+        return ;
     end
 
     local text = self.SettingEditBox:GetText();
@@ -37,6 +49,9 @@ function TargetCharmsEditBoxControlMixin:OnEditBoxTextChanged(userInput)
     end
 end
 
+--- Синхронизирует поле ввода `при изменении` значения настройки `извне`
+--- @param setting table Настройка, изменившая значение
+--- @param value string|nil Новое значение настройки
 function TargetCharmsEditBoxControlMixin:OnSettingValueChanged(setting, value)
     SettingsControlMixin.OnSettingValueChanged(self, setting, value);
 
@@ -48,6 +63,7 @@ function TargetCharmsEditBoxControlMixin:OnSettingValueChanged(setting, value)
     end
 end
 
+--- Включает/отключает поле ввода вместе с доступностью настройки
 function TargetCharmsEditBoxControlMixin:EvaluateState()
     SettingsListElementMixin.EvaluateState(self);
 
@@ -56,6 +72,7 @@ function TargetCharmsEditBoxControlMixin:EvaluateState()
     self:DisplayEnabled(enabled);
 end
 
+--- Очистка при переиспользовании контрола списком настроек
 function TargetCharmsEditBoxControlMixin:Release()
     self.SettingEditBox:SetScript("OnTextChanged", nil);
     SettingsControlMixin.Release(self);

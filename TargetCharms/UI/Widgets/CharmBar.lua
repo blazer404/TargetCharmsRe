@@ -1,15 +1,31 @@
+--- Построение панелей кнопок меток (цели и на земле)
+--- Разбирает строку-шаблон раскладки, создаёт кнопки и позиционирует их, назначает макросы для меток цели и флажков на земле
+
+
+--- @type string[]
 local frameNames = TC_FRAME_NAMES;
+
+--- @type string[]
 local texturePaths = TC_TEXTURE_PATHS;
 
+--- Номер текущей метки/флажка каждой кнопки панелей (TargetCharms / FlareCharms)
+--- @type table<string, table<number, number>>
 local buttonCharm = {
     ["TargetCharms"] = {},
     ["FlareCharms"] = {}
 };
 
+--- Возвращает таблицу соответствия кнопок выбранным меткам
+--- @return table<string, table<number, number>> buttonCharm
 function GetButtonCharm()
     return buttonCharm;
 end
 
+--- Создаёт (или возвращает существующую) кнопку панели
+--- @param frame string Имя панели ("TargetCharms"/"FlareCharms")
+--- @param buttonNum number Номер кнопки (1–20)
+--- @param isMacro boolean true для макросных кнопок (флажки, drag-кнопка)
+--- @return Button Кнопка с именем <frame>Charm<buttonNum>
 function MakeButton(frame, buttonNum, isMacro)
     local button = _G[frame .. "Charm" .. buttonNum];
     local template = "CharmTemplate, SecureCharmTemplate";
@@ -53,6 +69,10 @@ function MakeButton(frame, buttonNum, isMacro)
     return button;
 end
 
+--- Перестраивает панель по строке-шаблону раскладки:
+--- по паре символов на каждую кнопку, лишние кнопки скрывает (максимум `20` позиций)
+--- @param frameInfo string Имя панели, откуда брать настройки (TargetCharms/FlareCharms)
+--- @param frameTarget string Имя панели, куда создавать кнопки
 function SetupButtons(frameInfo, frameTarget)
     local buttonString = TargetCharms_Options[frameInfo]["buttonTemplate"];
     local maxlen = strlen(buttonString);
@@ -78,6 +98,15 @@ function SetupButtons(frameInfo, frameTarget)
     end
 end
 
+--- Позиционирует одну кнопку на панели
+--- и настраивает её содержимое в зависимости от пар символов (`направление` + `тип` метки/флажка)
+--- @param frame string Имя панели (TargetCharms/FlareCharms)
+--- @param buttonNum number Позиция кнопки на панели
+--- @param posChar string Символ направления (`^`/`v`/`<`/`>`)
+--- @param typeNum string Символ типа метки/флажка
+--- @param xSpacing number Горизонтальный зазор между кнопками
+--- @param ySpacing number Вертикальный зазор между кнопками
+--- @return boolean `true` - кнопка успешно размещена, `false` - нет кнопки
 function FormatButton(frame, buttonNum, posChar, typeNum, xSpacing, ySpacing)
     if frame == frameNames[1] then
         if typeNum == TARGETCHARMS_CHARM0 then
@@ -129,7 +158,7 @@ function FormatButton(frame, buttonNum, posChar, typeNum, xSpacing, ySpacing)
         if charmId and charmId >= 0 then
             button:SetAttribute("type", "macro")
             button:SetAttribute("macrotext", "/tm " .. charmId);
-		end
+        end
     else
         if typeNum == TARGETCHARMS_DRAG then
             button = _G[frame .. "Charm" .. buttonNum];
@@ -278,6 +307,20 @@ function FormatButton(frame, buttonNum, posChar, typeNum, xSpacing, ySpacing)
     return true;
 end
 
+--- Записывает номер метки кнопки в buttonCharm и задаёт текстуру основной иконки кнопки
+--- @param frame string Имя панели
+--- @param button Button Кнопка
+--- @param buttonNum number Позиция кнопки
+--- @param id number Номер метки (0–9) или флажка
+--- @param textureID number Индекс текстуры в TC_TEXTURE_PATHS
+--- @param o1 number Левая граница кадрирования
+--- @param o2 number Правая граница кадрирования
+--- @param o3 number Нижняя граница кадрирования
+--- @param o4 number Верхняя граница кадрирования
+--- @param a1 number Горизонтальный сдвиг иконки относительно центра
+--- @param a2 number Вертикальный сдвиг иконки относительно центра
+--- @param w number Ширина текстуры
+--- @param h number Высота текстуры
 function MakeCharm(frame, button, buttonNum, id, textureID, o1, o2, o3, o4, a1, a2, w, h)
     buttonCharm[frame][buttonNum] = id;
     local texture = _G[button:GetName() .. "CharmTex"];
@@ -286,6 +329,18 @@ function MakeCharm(frame, button, buttonNum, id, textureID, o1, o2, o3, o4, a1, 
     end
 end
 
+--- Задаёт текстуре файл, координаты кадрирования и размер/привязку к центру кнопки
+--- @param button Button Кнопка-родитель
+--- @param texture Texture Текстура
+--- @param textureID number Индекс текстуры в TC_TEXTURE_PATHS
+--- @param o1 number Левая граница кадрирования
+--- @param o2 number Правая граница кадрирования
+--- @param o3 number Нижняя граница кадрирования
+--- @param o4 number Верхняя граница кадрирования
+--- @param a1 number Горизонтальный сдвиг от центра кнопки
+--- @param a2 number Вертикальный сдвиг от центра кнопки
+--- @param w number Ширина текстуры
+--- @param h number Высота текстуры
 function SetTexture(button, texture, textureID, o1, o2, o3, o4, a1, a2, w, h)
     texture:ClearAllPoints();
     texture:SetWidth(w);
@@ -295,6 +350,9 @@ function SetTexture(button, texture, textureID, o1, o2, o3, o4, a1, a2, w, h)
     texture:SetPoint("CENTER", button, "CENTER", 0, 0);
 end
 
+--- Устанавливает масштаб фрейма-контейнера панели
+--- @param scale number Новый масштаб (0.5–3.0)
+--- @param id number Индекс панели в TC_FRAME_NAMES (1/3/5)
 function SetFrameScale(scale, id)
     local tmpFrame = _G[frameNames[id]];
     tmpFrame:SetScale(scale);

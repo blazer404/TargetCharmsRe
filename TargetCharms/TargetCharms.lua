@@ -1,13 +1,27 @@
+--- Точка входа аддона:
+--- * обработка событий
+--- * инициализация панелей и настроек
+--- * позиционирование фреймов
+
+
+--- @type string[]
 local frameNames = TC_FRAME_NAMES;
 
+--- Выводит текст в чат с зелёным префиксом аддона
+--- @param text string Текст сообщения без префикса
 function TargetCharms_msg(text)
     DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00" .. TARGETCHARMS_MSG_TAG .. "|r" .. text);
 end
 
-function resetTop(frame, offset)
+-- TODO понять зачем оно и можно ли избавится
+--- Заглушка, нигде не вызывается (оставлена от прежней версии)
+--- @param frame Frame Игнорируется
+--- @param offset number Игнорируется
+function resetTop(frame, offset) end
 
-end
-
+--- Регистрирует события для OnEvent и подключает слэш-команды.
+--- Вызывается из TargetCharms.xml в OnLoad фрейма
+--- @param self Frame Панель TargetCharms (родитель кнопок меток)
 function TargetCharms_OnLoad(self)
     self:RegisterEvent("VARIABLES_LOADED");
     self:RegisterEvent("PARTY_LEADER_CHANGED");
@@ -17,6 +31,11 @@ function TargetCharms_OnLoad(self)
     TargetCharms_RegisterSlashCommands();
 end
 
+--- Обработчик событий:
+--- * при VARIABLES_LOADED инициализирует настройки и панели,
+--- * при прочих событиях обновляет видимость панелей.
+--- @param self Frame Панель, получившая событие
+--- @param event string Название игрового события (например "VARIABLES_LOADED")
 function TargetCharms_OnEvent(self, event)
     if event == "VARIABLES_LOADED" then
         if TargetCharms_OptionsGlobal == nil or TARGETCHARMS_DB_VERSION ~= TargetCharms_OptionsGlobal["Version"] then
@@ -48,9 +67,9 @@ function TargetCharms_OnEvent(self, event)
         end
     end
     CheckFrameViewState();
-
 end
 
+--- Расставляет все фреймы и кнопки согласно настройкам (раскладка, кнопка готовности, hide/show).
 function SetupTargetCharms()
     SetupFrames();
     SetupButtons(frameNames[1], frameNames[1]);
@@ -59,6 +78,7 @@ function SetupTargetCharms()
     SetTargetHideShow();
 end
 
+--- Сбрасывает настройки к значениям по умолчанию и перестраивает панели.
 function TargetCharms_Reset()
     TargetCharms_Options = CloneTable(Defaults);
     TargetCharms_Options["Version"] = TARGETCHARMS_DB_VERSION;
@@ -73,6 +93,7 @@ function TargetCharms_Reset()
     TargetCharms_msg(TARGETCHARMS_OPTIONS_RESET);
 end
 
+--- Применяет сохранённые позицию, масштаб и прозрачность панелей целей и меток на земле.
 function SetupFrames()
     local tmpFrame = _G[frameNames[1]];
     if (TargetCharms_Options[frameNames[1]]["X"] ~= nil) then
@@ -98,6 +119,11 @@ function SetupFrames()
     tmpFrame:SetAlpha(TargetCharms_Options[frameNames[5]]["alphaVal"]);
 end
 
+--- Сохраняет позицию панели в настройки персонажа; если активен глобальный профиль —
+--- сразу записывает её и в глобальные настройки.
+---@param frameId number Индекс панели в TC_FRAME_NAMES (1/3/5)
+---@param x number Координата left
+---@param y number Координата top (корректируется до нижнего края панели)
 function UpdateLocation(frameId, x, y)
     local frame = frameNames[frameId];
     TargetCharms_Options[frame]["X"] = x;

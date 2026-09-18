@@ -1,6 +1,11 @@
--- Chat slash commands
--- Use /tc or /targetcharms for more info
+--- Регистрация команд /tc и /targetcharms и обработка их аргументов (`reset`/`setup`, иначе `справка`)
 
+
+--- Обрабатывает введённую команду:
+--- * `reset` — сброс настроек
+--- * `setup` — открытие окна настроек
+--- Любое другое значение или отсутствие команды выводит справку в чат
+--- @param msg string Введённая в чат строка после "/tc"
 function TargetCharms_Command(msg)
     orig_msg = msg
     msg = string.lower(msg)
@@ -17,6 +22,7 @@ function TargetCharms_Command(msg)
     CheckFlareFrameViewState();
 end
 
+--- Привязывает команды /tc и /targetcharms к обработчику
 function TargetCharms_RegisterSlashCommands()
     SLASH_TargetCharms1 = TARGETCHARMS_SLASH1;
     SLASH_TargetCharms2 = TARGETCHARMS_SLASH2;

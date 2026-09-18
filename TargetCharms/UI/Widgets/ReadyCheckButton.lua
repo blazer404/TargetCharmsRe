@@ -1,5 +1,11 @@
+--- Кнопка проверки готовности
+--- Применяет сохранённые позицию/масштаб/прозрачность кнопки готовности, подгоняет её размер под длину текста
+
+
+---@type string[]
 local frameNames = TC_FRAME_NAMES;
 
+--- Подгоняет размер кнопки и контейнера под ширину/высоту текста с учётом отступов
 function AutoSizeReadyButton()
     local button = _G[frameNames[3]]
     local parent = _G[frameNames[4]]
@@ -24,6 +30,7 @@ function AutoSizeReadyButton()
     fs:SetPoint("CENTER", button, "CENTER", 0, -1)
 end
 
+--- Расставляет кнопку готовности по сохранённой позиции, задаёт масштаб, текст и запускает авторазмер после отрисовки
 function SetUpReadyButton()
     local tmpFrame = _G[frameNames[4]];
     if (TargetCharms_Options[frameNames[3]]["X"] ~= nil) then
