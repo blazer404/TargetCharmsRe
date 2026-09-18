@@ -17,10 +17,10 @@ UI\Widgets\FrameState.lua
 UI\Widgets\ReadyButton.lua
 UI\Widgets\Flares.lua
 UI\Widgets\CharmButtons.lua
-UI\Setup.lua
+UI\Settings\Setup.lua
 TargetCharms.xml
-UI\SettingsEditBox.lua
-UI\TargetSettings.lua
-UI\FlareSettings.lua
-UI\ReadySettings.lua
-TargetCharmsSettings.lua
+UI\Settings\SettingsEditBox.lua
+UI\Settings\TargetSettings.lua
+UI\Settings\FlareSettings.lua
+UI\Settings\ReadySettings.lua
+UI\Settings\TargetCharmsSettings.lua
