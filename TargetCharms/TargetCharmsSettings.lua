@@ -1,9 +1,5 @@
 local addonName = ...
 
-local function CreateEnableGate(setting)
-	return Settings.CreateControlInitializer("SettingsCheckboxControlTemplate", setting)
-end
-
 local CUSTOM_LAYOUT = "CUSTOM"
 
 local customLayoutMode = {}
