@@ -17,10 +17,10 @@ UI\Widgets\BarVisibility.lua
 UI\Widgets\ReadyCheckButton.lua
 UI\Widgets\FlareBar.lua
 UI\Widgets\CharmBar.lua
-UI\Settings\Setup.lua
+UI\Settings\SettingsPanel.lua
 TargetCharms.xml
-UI\Settings\SettingsEditBox.lua
-UI\Settings\TargetSettings.lua
-UI\Settings\FlareSettings.lua
-UI\Settings\ReadySettings.lua
-UI\Settings\TargetCharmsSettings.lua
+UI\Settings\SettingsEditBoxControl.lua
+UI\Settings\TargetCharmSettings.lua
+UI\Settings\FlareCharmSettings.lua
+UI\Settings\ReadyButtonSettings.lua
+UI\Settings\SettingsCategory.lua
