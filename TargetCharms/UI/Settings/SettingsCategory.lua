@@ -59,10 +59,9 @@ local function RegisterSections(category, layout, RIGHT)
     TargetCharms_RegisterReadySettings(category, layout, RIGHT);
 end
 
---- Создаёт профильный блок категории: заголовок, чекбокс «основной профиль», кнопку копирования сохранить и регистрацию категории
-local function SetupProfileBlock(category, layout)
-    layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(TARGETCHARMS_OPTIONS_PROFILE))
-
+--- Регистрирует чекбокс «основной профиль»: задаёт имя текущего профиля в глобальных настройках
+--- @param category table Категория настроек аддона
+local function AddMainProfileCheckbox(category)
     Settings.CreateCheckbox(
             category,
             Settings.RegisterProxySetting(
@@ -81,7 +80,12 @@ local function SetupProfileBlock(category, layout)
                     end
             )
     )
+end
 
+--- Регистрирует кнопку копирования настроек профиля; показывается только при активном исходном профиле
+--- @param category table Категория настроек аддона
+--- @param layout table Вертикальная раскладка секции
+local function AddCopyProfileButton(category, layout)
     local sourceProfileName = TargetCharms_OptionsGlobal["Name"]
     local copyInitializer = CreateSettingsButtonInitializer(
             sourceProfileName and (TARGETCHARMS_OPTIONS_SOURCE .. " " .. sourceProfileName) or TARGETCHARMS_OPTIONS_SOURCE,
@@ -95,6 +99,15 @@ local function SetupProfileBlock(category, layout)
         return source ~= nil and source ~= UnitName("player")
     end)
     layout:AddInitializer(copyInitializer)
+end
+
+--- Создаёт профильный блок категории: заголовок, чекбокс «основной профиль», кнопку копирования сохранить и регистрацию категории
+local function SetupProfileBlock(category, layout)
+    layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(TARGETCHARMS_OPTIONS_PROFILE))
+
+    AddMainProfileCheckbox(category)
+
+    AddCopyProfileButton(category, layout)
 
     Settings.RegisterAddOnCategory(category)
     TargetCharms_SettingsCategoryID = category:GetID()
