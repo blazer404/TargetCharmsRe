@@ -69,20 +69,29 @@ function MakeButton(frame, buttonNum, isMacro)
     return button;
 end
 
+--- Вычисляет максимальную длину разбираемой строки шаблона: чётная, не более `40` символов
+--- @param buttonString string Строка-шаблон раскладки
+--- @return number Максимальная длина (число символов, кратное двум)
+local function GetMaxTemplateLength(buttonString)
+    local maxlen = strlen(buttonString);
+    if mod(maxlen, 2) == 1 then
+        maxlen = maxlen - 1
+    end
+    if maxlen > 40 then
+        maxlen = 40;
+    end
+    return maxlen;
+end
+
 --- Перестраивает панель по строке-шаблону раскладки:
 --- по паре символов на каждую кнопку, лишние кнопки скрывает (максимум `20` позиций)
 --- @param frameInfo string Имя панели, откуда брать настройки (TargetCharms/FlareCharms)
 --- @param frameTarget string Имя панели, куда создавать кнопки
 function SetupButtons(frameInfo, frameTarget)
     local buttonString = TargetCharms_Options[frameInfo]["buttonTemplate"];
-    local maxlen = strlen(buttonString);
-    if mod(maxlen, 2) == 1 then
-        maxlen = maxlen - 1
-    end
+    local maxlen = GetMaxTemplateLength(buttonString);
+
     local buttonNum = 1;
-    if maxlen > 40 then
-        maxlen = 40;
-    end
 
     local t
     for t = 1, maxlen, 2 do
