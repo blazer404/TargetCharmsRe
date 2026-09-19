@@ -7,9 +7,9 @@
 --- Любое другое значение или отсутствие команды выводит справку в чат
 --- @param msg string Введённая в чат строка после "/tc"
 function TargetCharms_Command(msg)
-    orig_msg = msg
+    local orig_msg = msg
     msg = string.lower(msg)
-    a, b, cmd, arg = string.find(msg, "(%S+)%s*(%S*)")
+    local a, b, cmd, arg = string.find(msg, "(%S+)%s*(%S*)")
     if cmd == TargetCharms_CMDS[1] then
         TargetCharms_Reset();
     elseif cmd == TargetCharms_CMDS[2] then
