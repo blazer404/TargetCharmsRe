@@ -98,6 +98,140 @@ function SetupButtons(frameInfo, frameTarget)
     end
 end
 
+--- Параметры иконки метки цели по символу типа (`0`–`9`): номер метки, индекс текстуры и её кадрирование
+--- @type table<string, { id:number, textureID:number, o1:number, o2:number, o3:number, o4:number, a1:number, a2:number, w:number, h:number }>
+local targetCharmSpecs = {
+    [TARGETCHARMS_CHARM0] = { id = 0, textureID = 2, o1 = 0.15, o2 = 0.85, o3 = 0.15, o4 = 0.85, a1 = 0, a2 = 0, w = 32, h = 32 },
+    [TARGETCHARMS_CHARM1] = { id = 1, textureID = 1, o1 = 0, o2 = 0.25, o3 = 0, o4 = 0.25, a1 = 2, a2 = -2, w = 28, h = 28 },
+    [TARGETCHARMS_CHARM2] = { id = 2, textureID = 1, o1 = 0.25, o2 = 0.5, o3 = 0, o4 = 0.25, a1 = 2, a2 = -2, w = 28, h = 28 },
+    [TARGETCHARMS_CHARM3] = { id = 3, textureID = 1, o1 = 0.5, o2 = 0.75, o3 = 0, o4 = 0.25, a1 = 2, a2 = -2, w = 28, h = 28 },
+    [TARGETCHARMS_CHARM4] = { id = 4, textureID = 1, o1 = 0.75, o2 = 1, o3 = 0, o4 = 0.25, a1 = 2, a2 = -2, w = 28, h = 28 },
+    [TARGETCHARMS_CHARM5] = { id = 5, textureID = 1, o1 = 0, o2 = 0.25, o3 = 0.25, o4 = 0.5, a1 = 2, a2 = -2, w = 28, h = 28 },
+    [TARGETCHARMS_CHARM6] = { id = 6, textureID = 1, o1 = 0.25, o2 = 0.5, o3 = 0.25, o4 = 0.5, a1 = 2, a2 = -2, w = 28, h = 28 },
+    [TARGETCHARMS_CHARM7] = { id = 7, textureID = 1, o1 = 0.5, o2 = 0.75, o3 = 0.25, o4 = 0.5, a1 = 2, a2 = -2, w = 28, h = 28 },
+    [TARGETCHARMS_CHARM8] = { id = 8, textureID = 1, o1 = 0.75, o2 = 1, o3 = 0.25, o4 = 0.5, a1 = 2, a2 = -2, w = 28, h = 28 },
+    [TARGETCHARMS_CHARM9] = { id = 9, textureID = 4, o1 = 0, o2 = 1, o3 = 0, o4 = 1, a1 = 0, a2 = 0, w = 32, h = 32 },
+};
+
+--- Параметры цветного флажка по символу типа: номер флажка, кадрирование иконки, цвет и макрос
+--- @type table<string, { id:number, o1:number, o2:number, o3:number, o4:number, r:number, g:number, b:number, macro:string }>
+local flareColorSpecs = {
+    [TARGETCHARMS_BLUEFLARE] = { id = 1, o1 = 0.25, o2 = 0.5, o3 = 0.25, o4 = 0.5, r = 0, g = .5, b = 1, macro = "/cwm 1\n/wm 1" },
+    [TARGETCHARMS_GREENFLARE] = { id = 2, o1 = 0.75, o2 = 1, o3 = 0, o4 = 0.25, r = 0, g = 1, b = .2, macro = "/cwm 2\n/wm 2" },
+    [TARGETCHARMS_PURPLEFLARE] = { id = 3, o1 = 0.5, o2 = 0.75, o3 = 0, o4 = 0.25, r = .5, g = 0, b = 1, macro = "/cwm 3\n/wm 3" },
+    [TARGETCHARMS_REDFLARE] = { id = 4, o1 = 0.5, o2 = 0.75, o3 = 0.25, o4 = 0.5, r = 1, g = 0, b = 0, macro = "/cwm 4\n/wm 4" },
+    [TARGETCHARMS_YELLOWFLARE] = { id = 5, o1 = 0, o2 = 0.25, o3 = 0, o4 = 0.25, r = 1, g = 1, b = 0, macro = "/cwm 5\n/wm 5" },
+    [TARGETCHARMS_ORANGEFLARE] = { id = 6, o1 = 0.25, o2 = 0.5, o3 = 0, o4 = 0.25, r = 1, g = .5, b = 0, macro = "/cwm 6\n/wm 6" },
+    [TARGETCHARMS_SILVERFLARE] = { id = 7, o1 = 0, o2 = 0.25, o3 = 0.25, o4 = 0.5, r = .5, g = .5, b = .5, macro = "/cwm 7\n/wm 7" },
+    [TARGETCHARMS_WHITEFLARE] = { id = 8, o1 = 0.75, o2 = 1, o3 = 0.25, o4 = 0.5, r = 1, g = 1, b = 1, macro = "/cwm 8\n/wm 8" },
+};
+
+--- Настраивает кнопку панели меток цели по символу типа: иконка, видимость и макрос `/tm`
+--- @param frame string Имя панели (TargetCharms)
+--- @param buttonNum number Номер кнопки
+--- @param typeNum string Символ типа метки (`0`–`9` или неизвестный)
+--- @return Button Кнопка
+local function FormatTargetCharm(frame, buttonNum, typeNum)
+    local button = MakeButton(frame, buttonNum, false);
+    local spec = targetCharmSpecs[typeNum];
+    if spec then
+        MakeCharm(frame, button, buttonNum, spec.id, spec.textureID, spec.o1, spec.o2, spec.o3, spec.o4, spec.a1, spec.a2, spec.w, spec.h);
+        button:Show();
+    else
+        button:Hide();
+    end
+    local charmId = buttonCharm[frame][buttonNum];
+    if charmId and charmId >= 0 then
+        button:SetAttribute("type", "macro")
+        button:SetAttribute("macrotext", "/tm " .. charmId);
+    end
+    return button;
+end
+
+--- Настраивает кнопку панели меток на земле по символу типа: драг-кнопка, цветной флажок, очистка или скрытое состояние
+--- @param frame string Имя панели (FlareCharms)
+--- @param buttonNum number Номер кнопки
+--- @param typeNum string Символ типа (`D`/цвета/`X` или неизвестный)
+--- @return Button Кнопка
+local function FormatFlareCharm(frame, buttonNum, typeNum)
+    if typeNum == TARGETCHARMS_DRAG then
+        local button = _G[frame .. "Charm" .. buttonNum];
+        if button == nil then
+            button = CreateFrame("Button", frame .. "Charm" .. buttonNum, _G[frame], "DragCharmTemplate")
+        end
+        button:SetID(buttonNum);
+        button:SetSize(16, 16);
+        local dragTexIcon = _G[button:GetName() .. "TextureIcon"];
+        if dragTexIcon then dragTexIcon:SetTexture() end
+        local dragTexColor = _G[button:GetName() .. "TextureColor"];
+        if dragTexColor then dragTexColor:SetTexture() end
+        if TargetCharms_Options["FlareCharms"]["draggable"] then
+            button:RegisterForClicks("AnyDown");
+            button:Show();
+        else
+            button:Hide();
+        end
+        return button;
+    end
+
+    local button = MakeButton(frame, buttonNum, true);
+    if typeNum == TARGETCHARMS_CLEARFLARE then
+        MakeCharm(frame, button, buttonNum, 0, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
+        SetTexture(button, _G[button:GetName() .. "TextureIcon"], 3, 0, 1, 0, 1, 3, -2, 26, 26);
+        _G[button:GetName() .. "TextureColor"]:SetTexture();
+        button:SetAttribute("macrotext", "/cwm 1\n/cwm 2\n/cwm 3\n/cwm 4\n/cwm 5\n/cwm 6\n/cwm 7\n/cwm 8");
+        button:Show();
+        return button;
+    end
+
+    local spec = flareColorSpecs[typeNum];
+    if spec then
+        MakeCharm(frame, button, buttonNum, spec.id, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
+        local icon = _G[button:GetName() .. "TextureIcon"];
+        if TargetCharms_Options[frameNames[5]]["showicons"] then
+            SetTexture(button, icon, 1, spec.o1, spec.o2, spec.o3, spec.o4, 6, -5, 20, 20);
+        else
+            icon:SetTexture();
+        end
+        local textureColor = _G[button:GetName() .. "TextureColor"];
+        textureColor:SetColorTexture(spec.r, spec.g, spec.b);
+        button:SetAttribute("macrotext", spec.macro);
+        button:Show();
+    else
+        button:Hide();
+    end
+    return button;
+end
+
+--- Позиционирует кнопку относительно предыдущей по символу направления
+--- @param frame string Имя панели (TargetCharms/FlareCharms)
+--- @param button Button Кнопка
+--- @param buttonNum number Номер кнопки
+--- @param posChar string Символ направления (`^`/`v`/`<`/`>`)
+--- @param xSpacing number Горизонтальный зазор между кнопками
+--- @param ySpacing number Вертикальный зазор между кнопками
+--- @return boolean true - кнопка размещена, false - невалидный символ направления
+local function PositionButton(frame, button, buttonNum, posChar, xSpacing, ySpacing)
+    button:ClearAllPoints();
+    if strlower(posChar) == TARGETCHARMS_POSITION_DOWN then
+        button:SetPoint("TOPLEFT", _G[frame .. "Charm" .. tostring(buttonNum - 1)], "BOTTOMLEFT", 0, 0 - ySpacing);
+    elseif posChar == TARGETCHARMS_POSITION_UP then
+        button:SetPoint("BOTTOMLEFT", _G[frame .. "Charm" .. tostring(buttonNum - 1)], "TOPLEFT", 0, 0 + ySpacing);
+    elseif posChar == TARGETCHARMS_POSITION_RIGHT then
+        button:SetPoint("TOPLEFT", _G[frame .. "Charm" .. tostring(buttonNum - 1)], "TOPRIGHT", 0 + xSpacing, 0);
+    elseif posChar == TARGETCHARMS_POSITION_LEFT then
+        button:SetPoint("TOPRIGHT", _G[frame .. "Charm" .. tostring(buttonNum - 1)], "TOPLEFT", 0 - xSpacing, 0);
+    else
+        --ERROR--
+        button:SetPoint("TOPLEFT", _G[frame .. "Charm" .. tostring(buttonNum - 1)], "TOPRIGHT", 0, 0 - ySpacing);
+        buttonCharm[frame][buttonNum] = 0;
+        button:Hide();
+        print(TARGETCHARMS_ERROR_INVALIDCHAR);
+        return false;
+    end
+    return true;
+end
+
 --- Позиционирует одну кнопку на панели
 --- и настраивает её содержимое в зависимости от пар символов (`направление` + `тип` метки/флажка)
 --- @param frame string Имя панели (TargetCharms/FlareCharms)
@@ -108,199 +242,14 @@ end
 --- @param ySpacing number Вертикальный зазор между кнопками
 --- @return boolean `true` - кнопка успешно размещена, `false` - нет кнопки
 function FormatButton(frame, buttonNum, posChar, typeNum, xSpacing, ySpacing)
+    local button;
     if frame == frameNames[1] then
-        if typeNum == TARGETCHARMS_CHARM0 then
-            button = MakeButton(frame, buttonNum, false);
-            MakeCharm(frame, button, buttonNum, 0, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-            button:Show();
-        elseif typeNum == TARGETCHARMS_CHARM1 then
-            button = MakeButton(frame, buttonNum, false);
-            MakeCharm(frame, button, buttonNum, 1, 1, 0, 0.25, 0, 0.25, 2, -2, 28, 28);
-            button:Show();
-        elseif typeNum == TARGETCHARMS_CHARM2 then
-            button = MakeButton(frame, buttonNum, false);
-            MakeCharm(frame, button, buttonNum, 2, 1, 0.25, 0.5, 0, 0.25, 2, -2, 28, 28);
-            button:Show();
-        elseif typeNum == TARGETCHARMS_CHARM3 then
-            button = MakeButton(frame, buttonNum, false);
-            MakeCharm(frame, button, buttonNum, 3, 1, 0.5, 0.75, 0, 0.25, 2, -2, 28, 28);
-            button:Show();
-        elseif typeNum == TARGETCHARMS_CHARM4 then
-            button = MakeButton(frame, buttonNum, false);
-            MakeCharm(frame, button, buttonNum, 4, 1, 0.75, 1, 0, 0.25, 2, -2, 28, 28);
-            button:Show();
-        elseif typeNum == TARGETCHARMS_CHARM5 then
-            button = MakeButton(frame, buttonNum, false);
-            MakeCharm(frame, button, buttonNum, 5, 1, 0, 0.25, 0.25, 0.5, 2, -2, 28, 28);
-            button:Show();
-        elseif typeNum == TARGETCHARMS_CHARM6 then
-            button = MakeButton(frame, buttonNum, false);
-            MakeCharm(frame, button, buttonNum, 6, 1, 0.25, 0.5, 0.25, 0.5, 2, -2, 28, 28);
-            button:Show();
-        elseif typeNum == TARGETCHARMS_CHARM7 then
-            button = MakeButton(frame, buttonNum, false);
-            MakeCharm(frame, button, buttonNum, 7, 1, 0.5, 0.75, 0.25, 0.5, 2, -2, 28, 28);
-            button:Show();
-        elseif typeNum == TARGETCHARMS_CHARM8 then
-            button = MakeButton(frame, buttonNum, false);
-            MakeCharm(frame, button, buttonNum, 8, 1, 0.75, 1, 0.25, 0.5, 2, -2, 28, 28);
-            button:Show();
-        elseif typeNum == TARGETCHARMS_CHARM9 then
-            button = MakeButton(frame, buttonNum, false);
-            MakeCharm(frame, button, buttonNum, 9, 4, 0, 1, 0, 1, 0, 0, 32, 32);
-            button:Show();
-        else
-            button = MakeButton(frame, buttonNum, false);
-            button:Hide();
-        end
-        -- bind button action as a macros
-        local charmId = buttonCharm[frame][buttonNum];
-        if charmId and charmId >= 0 then
-            button:SetAttribute("type", "macro")
-            button:SetAttribute("macrotext", "/tm " .. charmId);
-        end
+        button = FormatTargetCharm(frame, buttonNum, typeNum);
     else
-        if typeNum == TARGETCHARMS_DRAG then
-            button = _G[frame .. "Charm" .. buttonNum];
-            if button == nil then
-                button = CreateFrame("Button", frame .. "Charm" .. buttonNum, _G[frame], "DragCharmTemplate")
-            end
-            button:SetID(buttonNum);
-            button:SetSize(16, 16);
-            local dragTexIcon = _G[button:GetName() .. "TextureIcon"];
-            if dragTexIcon then dragTexIcon:SetTexture() end
-            local dragTexColor = _G[button:GetName() .. "TextureColor"];
-            if dragTexColor then dragTexColor:SetTexture() end
-            if TargetCharms_Options["FlareCharms"]["draggable"] then
-                button:RegisterForClicks("AnyDown");
-                button:Show();
-            else
-                button:Hide();
-            end
-        elseif typeNum == TARGETCHARMS_BLUEFLARE then
-            button = MakeButton(frame, buttonNum, true);
-            MakeCharm(frame, button, buttonNum, 1, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-            if TargetCharms_Options[frameNames[5]]["showicons"] then
-                SetTexture(button, _G[button:GetName() .. "TextureIcon"], 1, 0.25, 0.5, 0.25, 0.5, 6, -5, 20, 20);
-            else
-                _G[button:GetName() .. "TextureIcon"]:SetTexture();
-            end
-            local textureColor = _G[button:GetName() .. "TextureColor"];
-            textureColor:SetColorTexture(0, .5, 1);
-            button:SetAttribute("macrotext", "/cwm 1\n/wm 1");
-            button:Show();
-        elseif typeNum == TARGETCHARMS_GREENFLARE then
-            button = MakeButton(frame, buttonNum, true);
-            MakeCharm(frame, button, buttonNum, 2, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-            if TargetCharms_Options[frameNames[5]]["showicons"] then
-                SetTexture(button, _G[button:GetName() .. "TextureIcon"], 1, 0.75, 1, 0, 0.25, 6, -5, 20, 20);
-            else
-                _G[button:GetName() .. "TextureIcon"]:SetTexture();
-            end
-            local textureColor = _G[button:GetName() .. "TextureColor"];
-            textureColor:SetColorTexture(0, 1, .2);
-            button:SetAttribute("macrotext", "/cwm 2\n/wm 2");
-            button:Show();
-        elseif typeNum == TARGETCHARMS_PURPLEFLARE then
-            button = MakeButton(frame, buttonNum, true);
-            MakeCharm(frame, button, buttonNum, 3, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-            if TargetCharms_Options[frameNames[5]]["showicons"] then
-                SetTexture(button, _G[button:GetName() .. "TextureIcon"], 1, 0.5, 0.75, 0, 0.25, 6, -5, 20, 20);
-            else
-                _G[button:GetName() .. "TextureIcon"]:SetTexture();
-            end
-            local textureColor = _G[button:GetName() .. "TextureColor"];
-            textureColor:SetColorTexture(.5, 0, 1);
-            button:SetAttribute("macrotext", "/cwm 3\n/wm 3");
-            button:Show();
-        elseif typeNum == TARGETCHARMS_REDFLARE then
-            button = MakeButton(frame, buttonNum, true);
-            MakeCharm(frame, button, buttonNum, 4, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-            if TargetCharms_Options[frameNames[5]]["showicons"] then
-                SetTexture(button, _G[button:GetName() .. "TextureIcon"], 1, 0.5, 0.75, 0.25, 0.5, 6, -5, 20, 20);
-            else
-                _G[button:GetName() .. "TextureIcon"]:SetTexture();
-            end
-            local textureColor = _G[button:GetName() .. "TextureColor"];
-            textureColor:SetColorTexture(1, 0, 0);
-            button:SetAttribute("macrotext", "/cwm 4\n/wm 4");
-            button:Show();
-        elseif typeNum == TARGETCHARMS_YELLOWFLARE then
-            button = MakeButton(frame, buttonNum, true);
-            MakeCharm(frame, button, buttonNum, 5, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-            if TargetCharms_Options[frameNames[5]]["showicons"] then
-                SetTexture(button, _G[button:GetName() .. "TextureIcon"], 1, 0, 0.25, 0, 0.25, 6, -5, 20, 20);
-            else
-                _G[button:GetName() .. "TextureIcon"]:SetTexture();
-            end
-            local textureColor = _G[button:GetName() .. "TextureColor"];
-            textureColor:SetColorTexture(1, 1, 0);
-            button:SetAttribute("macrotext", "/cwm 5\n/wm 5");
-            button:Show();
-        elseif typeNum == TARGETCHARMS_ORANGEFLARE then
-            button = MakeButton(frame, buttonNum, true);
-            MakeCharm(frame, button, buttonNum, 6, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-            if TargetCharms_Options[frameNames[5]]["showicons"] then
-                SetTexture(button, _G[button:GetName() .. "TextureIcon"], 1, 0.25, 0.5, 0, 0.25, 6, -5, 20, 20);
-            else
-                _G[button:GetName() .. "TextureIcon"]:SetTexture();
-            end
-            local textureColor = _G[button:GetName() .. "TextureColor"];
-            textureColor:SetColorTexture(1, .5, 0);
-            button:SetAttribute("macrotext", "/cwm 6\n/wm 6");
-            button:Show();
-        elseif typeNum == TARGETCHARMS_SILVERFLARE then
-            button = MakeButton(frame, buttonNum, true);
-            MakeCharm(frame, button, buttonNum, 7, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-            if TargetCharms_Options[frameNames[5]]["showicons"] then
-                SetTexture(button, _G[button:GetName() .. "TextureIcon"], 1, 0, 0.25, 0.25, 0.5, 6, -5, 20, 20);
-            else
-                _G[button:GetName() .. "TextureIcon"]:SetTexture();
-            end
-            local textureColor = _G[button:GetName() .. "TextureColor"];
-            textureColor:SetColorTexture(.5, .5, .5);
-            button:SetAttribute("macrotext", "/cwm 7\n/wm 7");
-            button:Show();
-        elseif typeNum == TARGETCHARMS_WHITEFLARE then
-            button = MakeButton(frame, buttonNum, true);
-            MakeCharm(frame, button, buttonNum, 8, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-            if TargetCharms_Options[frameNames[5]]["showicons"] then
-                SetTexture(button, _G[button:GetName() .. "TextureIcon"], 1, 0.75, 1, 0.25, 0.5, 6, -5, 20, 20);
-            else
-                _G[button:GetName() .. "TextureIcon"]:SetTexture();
-            end
-            local textureColor = _G[button:GetName() .. "TextureColor"];
-            textureColor:SetColorTexture(1, 1, 1);
-            button:SetAttribute("macrotext", "/cwm 8\n/wm 8");
-            button:Show();
-        elseif typeNum == TARGETCHARMS_CLEARFLARE then
-            button = MakeButton(frame, buttonNum, true);
-            MakeCharm(frame, button, buttonNum, 0, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-            SetTexture(button, _G[button:GetName() .. "TextureIcon"], 3, 0, 1, 0, 1, 3, -2, 26, 26);
-            _G[button:GetName() .. "TextureColor"]:SetTexture();
-            button:SetAttribute("macrotext", "/cwm 1\n/cwm 2\n/cwm 3\n/cwm 4\n/cwm 5\n/cwm 6\n/cwm 7\n/cwm 8");
-            button:Show();
-        else
-            button = MakeButton(frame, buttonNum, true);
-            button:Hide();
-        end
+        button = FormatFlareCharm(frame, buttonNum, typeNum);
     end
     if button ~= nil then
-        button:ClearAllPoints();
-        if strlower(posChar) == TARGETCHARMS_POSITION_DOWN then
-            button:SetPoint("TOPLEFT", _G[frame .. "Charm" .. tostring(buttonNum - 1)], "BOTTOMLEFT", 0, 0 - ySpacing);
-        elseif posChar == TARGETCHARMS_POSITION_UP then
-            button:SetPoint("BOTTOMLEFT", _G[frame .. "Charm" .. tostring(buttonNum - 1)], "TOPLEFT", 0, 0 + ySpacing);
-        elseif posChar == TARGETCHARMS_POSITION_RIGHT then
-            button:SetPoint("TOPLEFT", _G[frame .. "Charm" .. tostring(buttonNum - 1)], "TOPRIGHT", 0 + xSpacing, 0);
-        elseif posChar == TARGETCHARMS_POSITION_LEFT then
-            button:SetPoint("TOPRIGHT", _G[frame .. "Charm" .. tostring(buttonNum - 1)], "TOPLEFT", 0 - xSpacing, 0);
-        else
-            --ERROR--
-            button:SetPoint("TOPLEFT", _G[frame .. "Charm" .. tostring(buttonNum - 1)], "TOPRIGHT", 0, 0 - ySpacing);
-            buttonCharm[frame][buttonNum] = 0;
-            button:Hide();
-            print(TARGETCHARMS_ERROR_INVALIDCHAR);
+        if not PositionButton(frame, button, buttonNum, posChar, xSpacing, ySpacing) then
             return false;
         end
     end
