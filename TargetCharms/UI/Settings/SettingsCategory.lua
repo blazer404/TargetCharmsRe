@@ -50,18 +50,17 @@ function TargetCharms_SettingsRefresh()
     end
 end
 
---- Создаёт категорию настроек, вызывает регистрацию секций.
---- Вызывается один раз при инициализации аддона (VARIABLES_LOADED).
-function TargetCharms_InitSettings()
-    local category, layout = Settings.RegisterVerticalLayoutCategory(addonName)
-    local RIGHT = MinimalSliderWithSteppersMixin.Label.Right
-
+--- Регистрирует секции настроек меток цели, флажков и кнопки готовности
+local function RegisterSections(category, layout, RIGHT)
     TargetCharms_RegisterTargetSettings(category, layout, RIGHT, customLayoutMode, CUSTOM_LAYOUT, FindPresetPattern);
 
     TargetCharms_RegisterFlareSettings(category, layout, RIGHT, customLayoutMode, CUSTOM_LAYOUT, FindPresetPattern);
 
     TargetCharms_RegisterReadySettings(category, layout, RIGHT);
+end
 
+--- Создаёт профильный блок категории: заголовок, чекбокс «основной профиль», кнопку копирования сохранить и регистрацию категории
+local function SetupProfileBlock(category, layout)
     layout:AddInitializer(CreateSettingsListSectionHeaderInitializer(TARGETCHARMS_OPTIONS_PROFILE))
 
     Settings.CreateCheckbox(
@@ -107,4 +106,15 @@ function TargetCharms_InitSettings()
             TargetCharms_Reset()
         end
     end)
+end
+
+--- Создаёт категорию настроек, вызывает регистрацию секций.
+--- Вызывается один раз при инициализации аддона (VARIABLES_LOADED).
+function TargetCharms_InitSettings()
+    local category, layout = Settings.RegisterVerticalLayoutCategory(addonName)
+    local RIGHT = MinimalSliderWithSteppersMixin.Label.Right
+
+    RegisterSections(category, layout, RIGHT);
+
+    SetupProfileBlock(category, layout);
 end
