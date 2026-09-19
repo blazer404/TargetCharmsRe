@@ -157,6 +157,65 @@ local function FormatTargetCharm(frame, buttonNum, typeNum)
     return button;
 end
 
+--- Настраивает кнопку-драг панели меток на земле; создаёт, если ещё не создана
+--- @param frame string Имя панели (FlareCharms)
+--- @param buttonNum number Номер кнопки
+--- @return Button Кнопка
+local function FormatFlareDrag(frame, buttonNum)
+    local button = _G[frame .. "Charm" .. buttonNum];
+    if button == nil then
+        button = CreateFrame("Button", frame .. "Charm" .. buttonNum, _G[frame], "DragCharmTemplate")
+    end
+    button:SetID(buttonNum);
+    button:SetSize(16, 16);
+    local dragTexIcon = _G[button:GetName() .. "TextureIcon"];
+    if dragTexIcon then dragTexIcon:SetTexture() end
+    local dragTexColor = _G[button:GetName() .. "TextureColor"];
+    if dragTexColor then dragTexColor:SetTexture() end
+    if TargetCharms_Options["FlareCharms"]["draggable"] then
+        button:RegisterForClicks("AnyDown");
+        button:Show();
+    else
+        button:Hide();
+    end
+    return button;
+end
+
+--- Настраивает кнопку-очистку цветных флажков
+--- @param frame string Имя панели (FlareCharms)
+--- @param button Button Кнопка
+--- @param buttonNum number Номер кнопки
+--- @return Button Кнопка
+local function FormatFlareClear(frame, button, buttonNum)
+    MakeCharm(frame, button, buttonNum, 0, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
+    SetTexture(button, _G[button:GetName() .. "TextureIcon"], 3, 0, 1, 0, 1, 3, -2, 26, 26);
+    _G[button:GetName() .. "TextureColor"]:SetTexture();
+    button:SetAttribute("macrotext", "/cwm 1\n/cwm 2\n/cwm 3\n/cwm 4\n/cwm 5\n/cwm 6\n/cwm 7\n/cwm 8");
+    button:Show();
+    return button;
+end
+
+--- Настраивает цветной флажок: иконку (при включённых иконках) и цвет круга
+--- @param frame string Имя панели (FlareCharms)
+--- @param button Button Кнопка
+--- @param buttonNum number Номер кнопки
+--- @param spec table Описание флажка из flareColorSpecs
+--- @return Button Кнопка
+local function FormatFlareColor(frame, button, buttonNum, spec)
+    MakeCharm(frame, button, buttonNum, spec.id, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
+    local icon = _G[button:GetName() .. "TextureIcon"];
+    if TargetCharms_Options[frameNames[5]]["showicons"] then
+        SetTexture(button, icon, 1, spec.o1, spec.o2, spec.o3, spec.o4, 6, -5, 20, 20);
+    else
+        icon:SetTexture();
+    end
+    local textureColor = _G[button:GetName() .. "TextureColor"];
+    textureColor:SetColorTexture(spec.r, spec.g, spec.b);
+    button:SetAttribute("macrotext", spec.macro);
+    button:Show();
+    return button;
+end
+
 --- Настраивает кнопку панели меток на земле по символу типа: драг-кнопка, цветной флажок, очистка или скрытое состояние
 --- @param frame string Имя панели (FlareCharms)
 --- @param buttonNum number Номер кнопки
@@ -164,51 +223,19 @@ end
 --- @return Button Кнопка
 local function FormatFlareCharm(frame, buttonNum, typeNum)
     if typeNum == TARGETCHARMS_DRAG then
-        local button = _G[frame .. "Charm" .. buttonNum];
-        if button == nil then
-            button = CreateFrame("Button", frame .. "Charm" .. buttonNum, _G[frame], "DragCharmTemplate")
-        end
-        button:SetID(buttonNum);
-        button:SetSize(16, 16);
-        local dragTexIcon = _G[button:GetName() .. "TextureIcon"];
-        if dragTexIcon then dragTexIcon:SetTexture() end
-        local dragTexColor = _G[button:GetName() .. "TextureColor"];
-        if dragTexColor then dragTexColor:SetTexture() end
-        if TargetCharms_Options["FlareCharms"]["draggable"] then
-            button:RegisterForClicks("AnyDown");
-            button:Show();
-        else
-            button:Hide();
-        end
-        return button;
+        return FormatFlareDrag(frame, buttonNum);
     end
 
     local button = MakeButton(frame, buttonNum, true);
     if typeNum == TARGETCHARMS_CLEARFLARE then
-        MakeCharm(frame, button, buttonNum, 0, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-        SetTexture(button, _G[button:GetName() .. "TextureIcon"], 3, 0, 1, 0, 1, 3, -2, 26, 26);
-        _G[button:GetName() .. "TextureColor"]:SetTexture();
-        button:SetAttribute("macrotext", "/cwm 1\n/cwm 2\n/cwm 3\n/cwm 4\n/cwm 5\n/cwm 6\n/cwm 7\n/cwm 8");
-        button:Show();
-        return button;
+        return FormatFlareClear(frame, button, buttonNum);
     end
 
     local spec = flareColorSpecs[typeNum];
     if spec then
-        MakeCharm(frame, button, buttonNum, spec.id, 2, 0.15, 0.85, 0.15, 0.85, 0, 0, 32, 32);
-        local icon = _G[button:GetName() .. "TextureIcon"];
-        if TargetCharms_Options[frameNames[5]]["showicons"] then
-            SetTexture(button, icon, 1, spec.o1, spec.o2, spec.o3, spec.o4, 6, -5, 20, 20);
-        else
-            icon:SetTexture();
-        end
-        local textureColor = _G[button:GetName() .. "TextureColor"];
-        textureColor:SetColorTexture(spec.r, spec.g, spec.b);
-        button:SetAttribute("macrotext", spec.macro);
-        button:Show();
-    else
-        button:Hide();
+        return FormatFlareColor(frame, button, buttonNum, spec);
     end
+    button:Hide();
     return button;
 end
 
