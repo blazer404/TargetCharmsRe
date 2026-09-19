@@ -98,30 +98,28 @@ function TargetCharms_Reset()
     TargetCharms_msg(TARGETCHARMS_OPTIONS_RESET);
 end
 
---- Применяет сохранённые позицию, масштаб и прозрачность панелей целей и меток на земле.
+--- Применяет сохранённые позицию, масштаб и прозрачность одной панели
+--- @param index number Индекс панели в TC_FRAME_NAMES (1 — метки цели, 5 — метки на земле)
+--- @param defaultX number Значение left при отсутствии сохранённой позиции
+--- @param defaultY number Значение top при отсутствии сохранённой позиции
+local function ApplyPanelOptions(index, defaultX, defaultY)
+    local frameBar = frameNames[index];
+    local frameBody = frameNames[index + 1];
+    if (TargetCharms_Options[frameBar]["X"] ~= nil) then
+        _G[frameBody]:ClearAllPoints()
+        _G[frameBody]:SetPoint("BOTTOMLEFT", TargetCharms_Options[frameBar]["X"], TargetCharms_Options[frameBar]["Y"]);
+    else
+        _G[frameBody]:ClearAllPoints()
+        _G[frameBody]:SetPoint("TOPLEFT", _G["UIParent"], "TOP", defaultX, defaultY);
+    end
+    _G[frameBar]:SetScale(TargetCharms_Options[frameBar]["barscale"]);
+    _G[frameBody]:SetAlpha(TargetCharms_Options[frameBar]["alphaVal"]);
+end
+
+--- Применяет сохранённые позицию, масштаб и прозрачность панелей целей и меток на земле
 function SetupFrames()
-    local tmpFrame = _G[frameNames[1]];
-    if (TargetCharms_Options[frameNames[1]]["X"] ~= nil) then
-        _G[frameNames[2]]:ClearAllPoints()
-        _G[frameNames[2]]:SetPoint("BOTTOMLEFT", TargetCharms_Options[frameNames[1]]["X"], TargetCharms_Options[frameNames[1]]["Y"]);
-    else
-        _G[frameNames[2]]:ClearAllPoints()
-        _G[frameNames[2]]:SetPoint("TOPLEFT", _G["UIParent"], "TOP", 0, -20);
-    end
-    tmpFrame:SetScale(TargetCharms_Options[frameNames[1]]["barscale"]);
-    tmpFrame = _G[frameNames[2]];
-    tmpFrame:SetAlpha(TargetCharms_Options[frameNames[1]]["alphaVal"]);
-    tmpFrame = _G[frameNames[5]];
-    if (TargetCharms_Options[frameNames[5]]["X"] ~= nil) then
-        _G[frameNames[6]]:ClearAllPoints();
-        _G[frameNames[6]]:SetPoint("BOTTOMLEFT", TargetCharms_Options[frameNames[5]]["X"], TargetCharms_Options[frameNames[5]]["Y"]);
-    else
-        _G[frameNames[6]]:ClearAllPoints()
-        _G[frameNames[6]]:SetPoint("TOPLEFT", _G["UIParent"], "TOP", 100, 0);
-    end
-    tmpFrame:SetScale(TargetCharms_Options[frameNames[5]]["barscale"]);
-    tmpFrame = _G[frameNames[6]];
-    tmpFrame:SetAlpha(TargetCharms_Options[frameNames[5]]["alphaVal"]);
+    ApplyPanelOptions(1, 0, -20);
+    ApplyPanelOptions(5, 100, 0);
 end
 
 --- Сохраняет позицию панели в настройки персонажа; если активен глобальный профиль —
