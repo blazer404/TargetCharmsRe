@@ -21,6 +21,18 @@ function GetButtonCharm()
     return buttonCharm;
 end
 
+--- Создаёт на кнопке слои TextureColor и TextureIcon, используемые для подсветки макросных кнопок
+--- @param button Button Кнопка
+local function AddMacroTextures(button)
+    local textureColor = button:CreateTexture(button:GetName() .. "TextureColor");
+    textureColor:SetDrawLayer("BORDER");
+    textureColor:SetPoint("TOPLEFT", _G[button:GetName() .. "CharmTex"], "TOPLEFT", 5, -5);
+    textureColor:SetPoint("BOTTOMRIGHT", _G[button:GetName() .. "CharmTex"], "BOTTOMRIGHT", -5, 5);
+    local textureIcon = button:CreateTexture(button:GetName() .. "TextureIcon");
+    textureIcon:SetDrawLayer("OVERLAY");
+    textureIcon:SetAllPoints(button);
+end
+
 --- Создаёт (или возвращает существующую) кнопку панели
 --- @param frame string Имя панели ("TargetCharms"/"FlareCharms")
 --- @param buttonNum number Номер кнопки (1–20)
@@ -44,24 +56,12 @@ function MakeButton(frame, buttonNum, isMacro)
             button:SetAttribute("type", "macro")
             button:SetHeight(32);
             button:SetWidth(32);
-            local textureColor = button:CreateTexture(button:GetName() .. "TextureColor");
-            textureColor:SetDrawLayer("BORDER");
-            textureColor:SetPoint("TOPLEFT", _G[button:GetName() .. "CharmTex"], "TOPLEFT", 5, -5);
-            textureColor:SetPoint("BOTTOMRIGHT", _G[button:GetName() .. "CharmTex"], "BOTTOMRIGHT", -5, 5);
-            local textureIcon = button:CreateTexture(button:GetName() .. "TextureIcon");
-            textureIcon:SetDrawLayer("OVERLAY");
-            textureIcon:SetAllPoints(button);
+            AddMacroTextures(button);
         end
     elseif isMacro and not _G[button:GetName() .. "TextureColor"] then
         button:SetAttribute("type", "macro")
         button:SetSize(32, 32);
-        local textureColor = button:CreateTexture(button:GetName() .. "TextureColor");
-        textureColor:SetDrawLayer("BORDER");
-        textureColor:SetPoint("TOPLEFT", _G[button:GetName() .. "CharmTex"], "TOPLEFT", 5, -5);
-        textureColor:SetPoint("BOTTOMRIGHT", _G[button:GetName() .. "CharmTex"], "BOTTOMRIGHT", -5, 5);
-        local textureIcon = button:CreateTexture(button:GetName() .. "TextureIcon");
-        textureIcon:SetDrawLayer("OVERLAY");
-        textureIcon:SetAllPoints(button);
+        AddMacroTextures(button);
     end
     if isMacro then
         button:SetSize(32, 32);
