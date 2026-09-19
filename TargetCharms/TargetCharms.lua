@@ -31,6 +31,23 @@ function TargetCharms_OnLoad(self)
     TargetCharms_RegisterSlashCommands();
 end
 
+--- Инициализирует или мигрирует SavedVariables (глобальные и персонажа), приводит значения к допустимым
+local function InitVarsOnLoaded()
+    if TargetCharms_OptionsGlobal == nil or TARGETCHARMS_DB_VERSION ~= TargetCharms_OptionsGlobal["Version"] then
+        TargetCharms_OptionsGlobal = CopyOldValues(Defaults, Defaults);
+        TargetCharms_OptionsGlobal["Version"] = TARGETCHARMS_DB_VERSION;
+        TargetCharms_OptionsGlobal["Name"] = UnitName("player");
+        TargetCharms_Options = CopyOldValues(TargetCharms_OptionsGlobal, TargetCharms_OptionsGlobal);
+    end
+    if TargetCharms_Options == nil or TARGETCHARMS_DB_VERSION ~= TargetCharms_Options["Version"] then
+        TargetCharms_Options = CopyOldValues(TargetCharms_OptionsGlobal, TargetCharms_Options);
+        CopyValues(TargetCharms_Options, TargetCharms_OptionsGlobal);
+        TargetCharms_Options["Version"] = TARGETCHARMS_DB_VERSION;
+    end
+
+    NormalizeOptionValues();
+end
+
 --- Обработчик событий:
 --- * при VARIABLES_LOADED инициализирует настройки и панели,
 --- * при прочих событиях обновляет видимость панелей.
@@ -38,19 +55,7 @@ end
 --- @param event string Название игрового события (например "VARIABLES_LOADED")
 function TargetCharms_OnEvent(self, event)
     if event == "VARIABLES_LOADED" then
-        if TargetCharms_OptionsGlobal == nil or TARGETCHARMS_DB_VERSION ~= TargetCharms_OptionsGlobal["Version"] then
-            TargetCharms_OptionsGlobal = CopyOldValues(Defaults, Defaults);
-            TargetCharms_OptionsGlobal["Version"] = TARGETCHARMS_DB_VERSION;
-            TargetCharms_OptionsGlobal["Name"] = UnitName("player");
-            TargetCharms_Options = CopyOldValues(TargetCharms_OptionsGlobal, TargetCharms_OptionsGlobal);
-        end
-        if TargetCharms_Options == nil or TARGETCHARMS_DB_VERSION ~= TargetCharms_Options["Version"] then
-            TargetCharms_Options = CopyOldValues(TargetCharms_OptionsGlobal, TargetCharms_Options);
-            CopyValues(TargetCharms_Options, TargetCharms_OptionsGlobal);
-            TargetCharms_Options["Version"] = TARGETCHARMS_DB_VERSION;
-        end
-
-        NormalizeOptionValues();
+        InitVarsOnLoaded();
 
         SetupTargetCharms();
 
